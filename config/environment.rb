@@ -35,6 +35,12 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names.
   config.time_zone = 'UTC'
 
+  config.gem 'haml', :version => ">= 2.2.0"
+  config.gem 'mechanize'
+  #config.gem "icalendar"
+  #config.gem "chriseppstein-compass", :lib => "compass"
+  #config.gem 'pauldix-feedzirra', :lib => "feedzirra"
+
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
