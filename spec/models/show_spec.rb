@@ -12,13 +12,16 @@ describe Show do
       #better to stub this in model
       house_dog = Factory(:show)
       pt_id = 1167
-      show = Show.create_from_pt_id(pt_id)
+      Song.stub!(:create_by_pt_id).and_return(Factory(:song))
+      show = Show.create_by_pt_id(pt_id)
       show.should be_valid
       show.date.should == house_dog.date
     end
   end
 
   it "should create a setlist from a valid array" do
+    Song.stub!(:create_by_pt_id).and_return(Factory(:song))
+
     setlist_data = [
                     {:name=>"Set I:", :songs=>[{:segue=>true, :pt_song_id=>304, :notes=>[], :note_numbers=>[], :name=>"Papercut"},
                                                {:segue=>false, :pt_song_id=>56, :notes=>[], :note_numbers=>[], :name=>"Mr. Don"},

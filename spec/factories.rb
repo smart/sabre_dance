@@ -2,7 +2,7 @@ Factory.define(:song) do |s|
   s.name "House Dog Party Favor"
   s.pt_nickname "House Dog"
   s.author "The Disco Biscuits"
-  s.pt_id 37
+  s.sequence(:pt_id){|de| de + 1 }
   s.estimated_duration 11
   s.band_rank 2
   s.fan_rank 2
@@ -10,7 +10,7 @@ end
 
 
 Factory.define(:show) do |s|
-  s.pt_id 1167
+  s.sequence(:pt_id){|de| de }
   s.association :venue
   s.date Date.parse("Saturday, October, 10, 2009")
 end
@@ -30,5 +30,5 @@ end
 
 Factory.define(:tour) do |t|
   t.name "Fall Tour 2009"
-  t.pt_id 39
+  t.sequence(:pt_id){|de| de }
 end

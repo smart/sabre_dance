@@ -70,7 +70,7 @@ describe PhantasyTour do
     it "should return a hash of venue info from a valid id" do
       valid_id = 1356
       ret_hash = @pt.venue_info_from_id(valid_id)
-      ret_hash.should == {:state=>"MA", :name=>"Calvin Theatre", :pt_id=>1356, :city=>"Northampton"}
+      ret_hash.should == {:pt_id=>1356, :website=>"www.calvintheater.com/", :map=>"http://maps.yahoo.com/py/maps.py?addr=19 King Street&\n      csz=Northampton+MA&country=", :state=>"MA", :city=>"Northampton", :name=>"Calvin Theatre"}
     end
   end
 
