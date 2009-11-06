@@ -1,0 +1,12 @@
+<h1>Editing show_set_list</h1>
+
+<% form_for(@show_set_list) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @show_set_list %> |
+<%= link_to 'Back', show_set_lists_path %>

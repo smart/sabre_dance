@@ -1,0 +1,12 @@
+<h1>Editing song_performance</h1>
+
+<% form_for(@song_performance) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @song_performance %> |
+<%= link_to 'Back', song_performances_path %>
