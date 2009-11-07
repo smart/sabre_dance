@@ -3,6 +3,9 @@ class Song < ActiveRecord::Base
   has_many :song_performances
   validates_uniqueness_of :pt_id
 
+  named_scope :by_frequency, :select => "songs.*, count(song_performances.id) as frequency",
+                             :joins => :song_performances, :group => "songs.id"
+
   def self.find_or_create_by_pt_id(id)
     find_by_pt_id(id) || create_by_pt_id(id)
   end

@@ -20,4 +20,18 @@ describe Song do
 
   end
 
+  it "should be able to return songs in the most played order" do
+    song_1 = Factory(:song, :name => "Sound 1")
+    song_2 = Factory(:song, :name => "42")
+    (1..4).each {|i| Factory(:song_performance, :song => song_1)}
+    (1..2).each {|i| Factory(:song_performance, :song => song_2)}
+
+    songs = Song.by_frequency
+    songs.first.should == song_1
+    songs.first.frequency == 4
+    songs.second.should == song_2
+    songs.second.frequency == 2
+  end
+
+
 end
