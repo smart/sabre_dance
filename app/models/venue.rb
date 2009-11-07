@@ -2,10 +2,15 @@ class Venue < ActiveRecord::Base
   has_many :shows
   has_many :songs,  :through => :shows
   validates_uniqueness_of :pt_id
+  acts_as_mappable :auto_geocode=>true
 
 
   def self.find_or_create_by_pt_id(id)
     find_by_pt_id(id) || create_by_pt_id(id)
+  end
+
+  def address
+    "#{city}, #{state}"
   end
 
   def self.create_by_pt_id(id)
