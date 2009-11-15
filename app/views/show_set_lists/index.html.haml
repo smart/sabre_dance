@@ -3,7 +3,7 @@
 #left_bar
   %ol
     - @tour.song_stats.each do |song|
-      %li{:id => "tour_#{song.id}"}= song.name
+      %li{:id => "tour_#{song.id}"}= "#{song.name} (#{song.plays})"
       =draggable_element("tour_#{song.id}", :revert => true, :ghosting => true)
 
 #main
