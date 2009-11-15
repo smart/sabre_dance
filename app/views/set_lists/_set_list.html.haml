@@ -1,0 +1,10 @@
+.set_list{:id => "set_list_#{set_list.id}"}
+  %h4= set_list.name
+  %ol{:id => "song_performances_#{set_list.id}"}
+    - set_list.song_performances.each do |sp|
+      %li{:id => "song_performance_#{sp.id}"}
+        .song_performance_notes= text_field_tag "song_performance_notes_#{sp.id}", sp.notes
+        .song_performance_name= sp.song.name
+        %span{:id => "song_performance_#{sp.id}_segue"}
+          %em{:class => "song_performance_segue  #{sp.segue? ? "segue" : "stop"}"}= "#{sp.segue? ? ">" : ","}"
+        %br{:clear => "all"}

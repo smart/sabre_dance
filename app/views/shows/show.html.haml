@@ -1,0 +1,14 @@
+%h1= "#{@show.date}" + (@show.venue ? " #{@show.venue.name}, #{@show.venue.city} #{@show.venue.state}" : "")
+
+
+= link_to 'Edit Set List', show_show_set_lists_path(@show)
+= link_to 'Back', shows_path
+= link_to "Print Set List", print_set_list_show_url(@show), :popup => true
+%br
+#main
+  - @show.show_set_lists.each_with_index do |show_set_list, i|
+    .show_set_list
+      .show_set_list_title
+        %h4=show_set_list.name
+      = render :partial => "set_lists/set_list", :locals => {:set_list => show_set_list.set_list}
+

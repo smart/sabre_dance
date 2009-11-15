@@ -10,6 +10,15 @@ class SetListsController < ApplicationController
     end
   end
 
+  def sort
+    @set_list = SetList.find(params[:id])
+    @set_list.song_performances.each do |sp|
+      sp.position = params['song_performance_ids'].index(sp.id.to_s) + 1
+      sp.save!
+    end
+    render :nothing => true
+  end
+
   # GET /set_lists/1
   # GET /set_lists/1.xml
   def show

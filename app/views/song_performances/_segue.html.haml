@@ -1,0 +1,1 @@
+= link_to_remote "<em>#{song_performance.segue? ? ">" : ","}</em>", :update => "song_performance_#{song_performance.id}_segue", :url => toggle_segue_song_performance_url(song_performance), :html => {:class => "song_performance_segue  #{song_performance.segue? ? "segue" : "stop"}"}

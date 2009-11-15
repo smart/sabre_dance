@@ -19,4 +19,6 @@ describe Tour do
 
 
   end
+
+  it "should find songs played and order by amount played"
 end

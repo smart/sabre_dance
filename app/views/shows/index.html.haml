@@ -1,0 +1,7 @@
+%table
+  %thead
+    %tr
+  %tbody
+    - @shows.each do |show|
+      %tr
+        %td= link_to"#{show.date}" + (show.venue ? " #{show.venue.name}, #{show.venue.city} #{show.venue.state}" : ""), show_url(show)

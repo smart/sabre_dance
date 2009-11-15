@@ -2,13 +2,20 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.xml
   def index
-    @shows = Show.all
+    @shows = Show.find(:all, :order => "date desc")
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }
     end
   end
+
+  def print_set_list
+    @show = Show.find(params[:id])
+
+    render :template => "shows/print_set_list", :layout => "print"
+  end
+
 
   # GET /shows/1
   # GET /shows/1.xml

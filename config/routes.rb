@@ -1,19 +1,22 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.root :controller => "shows", :action => "index"
-  map.resources :set_lists
+  map.root :controller => "dashboard", :action => "index"
+
+  map.resources :set_lists, :member => {:sort => :any}, :has_many => [:song_performances]
 
   map.resources :show_set_lists
 
   map.resources :tours
 
-  map.resources :song_performances
+  map.resources :song_performances, :member => {:toggle_segue  => :any, :update_notes => :any}
 
   map.resources :venues
 
   map.resources :songs
 
-  map.resources :shows
+  map.resources :shows, :member => {:print_set_list => :any} do |show|
+    show.resources :show_set_lists
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

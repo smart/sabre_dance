@@ -1,0 +1,13 @@
+%h1 New Show
+
+- form_for@show do |f|
+  = f.error_messages
+  %p
+    =f.label :name, "Name:(optional)"
+    = f.text_field :name
+  %p
+    =f.label :date, "Date:"
+    = f.date_select :date
+  %p= f.submit 'Create'
+
+= link_to 'Back', shows_path

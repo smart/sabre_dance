@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %link{ :rel => "shortcut icon", :href => "/favicon.ico", :type => "image/x-icon"}/
+    %title= "Sabre Dance :: "+ controller.controller_name.capitalize
+    = stylesheet_link_tag 'compiled/screen'
+    = javascript_include_tag :all
+  %body
+    .header#header
+      = render :partial => 'layouts/header'
+    .container
+      .flash
+        %p{:style => "color: green"}= flash[:notice]
+      .content#content= yield

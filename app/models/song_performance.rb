@@ -4,7 +4,11 @@ class SongPerformance < ActiveRecord::Base
   acts_as_list :scope => :set_list
   acts_as_taggable_on :tags
 
+  delegate :show, :to => :set_list
+
   validates_presence_of :song
+
+  default_scope :order => "song_performances.position asc"
 
   def self.new_from_pt_data(pt_data)
     sp = new

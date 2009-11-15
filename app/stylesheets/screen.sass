@@ -11,16 +11,49 @@
 // +blueprint
 
 //Recommended Blueprint configuration with scoping and semantic layout:
-+blueprint-typography("body.bp")
-+blueprint-scaffolding("body.bp")
-body.bp
+
++blueprint-scaffolding
+body
+  +blueprint-typography
   +blueprint-utilities
   +blueprint-debug
   +blueprint-interaction
+  :font-size 62.5%
+  :font-family "lucida grande",tahoma,verdana,arial,sans-serif
+  .container
+    +container
+    #left_bar
+      +column(6)
+    #main
+      +column(12, true)
+      
+      .show_set_list
+        :background-color green
+        :margin 10px
+        .new_song_hover
+          :background-color #333333
+        .song_performance_name
+          :float left   
+        .song_performance_segue
+          :float left
+          :width 14px
+          :height 10px
+          :top 5px
+          :left 5px
+          :font-weight bold
+        .song_performance_notes
+          :float right
+        .segue
+          :background-color #FFCCCC
+        .stop
+          :background-color #CCCCFF
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
-form.bp
-  +blueprint-form
+  form
+    +blueprint-form
+
+@import partials/colors.sass
+@import partials/header.sass
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.three-col

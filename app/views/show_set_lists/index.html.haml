@@ -1,0 +1,20 @@
+%h1 Build a Set List
+= link_to "Print Set List", print_set_list_show_url(@show), :popup => true
+#left_bar
+  %ol
+    - @tour.song_stats.each do |song|
+      %li{:id => "tour_#{song.id}"}= song.name
+      =draggable_element("tour_#{song.id}", :revert => true, :ghosting => true)
+
+#main
+  - @show_set_lists.each_with_index do |show_set_list, i|
+    .show_set_list
+      .show_set_list_title
+        %h4=show_set_list.name
+        = link_to_remote "delete", :method => :delete, :url => show_set_list_url(show_set_list)
+      = render :partial => "show_set_lists/set_list", :locals => {:set_list => show_set_list.set_list}
+
+
+
+
+= link_to 'New show_set_list', new_show_show_set_list_path(@show)
