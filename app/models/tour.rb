@@ -19,7 +19,8 @@ class Tour < ActiveRecord::Base
   end
 
   def song_stats
-    SongPerformance.find(:all, :select => "songs.name as name, songs.id as id, COUNT(song_performances.song_id) as plays", :order => "plays desc", :joins => [{:set_list => {:show_set_list => :show}}, :song], :conditions => ["tour_id = ?", id], :group => "song_performances.song_id")
+    Song.find(:all, :select => "songs.name as name, songs.id as id, COUNT(song_performances.song_id) as plays", :order => "plays desc", :joins => [{:song_performances => {:set_list => {:show_set_list => :show}}}], :conditions => ["tour_id = ?", id], :group => "songs.id, songs.name")
+    #SongPerformance.find(:all, :select => "songs.name as name, songs.id as id, COUNT(song_performances.song_id) as plays", :order => "plays desc", :joins => [{:set_list => {:show_set_list => :show}}, :song], :conditions => ["tour_id = ?", id], :group => "song_performances.song_id")
     #songs.find(:all, :select => "songs.*, COUNT(songs.id) as plays", :group => "song.id", :order => "plays desc")
   end
 end
