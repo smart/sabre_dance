@@ -1,0 +1,17 @@
+%h1= "#{@tour.name}"
+
+= sexy_button_to 'Edit', edit_tour_path(@tour)
+= sexy_button_to 'Back', tours_path
+
+%br
+%br 
+
+%h2 Upcoming Shows
+%ul
+  - @upcoming_shows.each do |show|
+    %li= link_to"#{show.date}" + (show.venue ? " #{show.venue.name}, #{show.venue.city} #{show.venue.state}" : ""), show_url(show)
+
+%h2 Past Shows
+%ul
+  - @past_shows.each do |show|
+    %li= link_to"#{show.date}" + (show.venue ? " #{show.venue.name}, #{show.venue.city} #{show.venue.state}" : ""), show_url(show)
