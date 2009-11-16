@@ -2,3 +2,5 @@ log/*.log
 db/development.sqlite3
 db/schema.rb
 public/stylesheets/compiled/*
+.DS_Store
+tmp/sass-cache/*

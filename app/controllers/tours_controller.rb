@@ -14,6 +14,8 @@ class ToursController < ApplicationController
   # GET /tours/1.xml
   def show
     @tour = Tour.find(params[:id])
+    @upcoming_shows = @tour.shows.upcoming.find(:all, :order => "date desc")
+    @past_shows = @tour.shows.played.find(:all, :order => "date desc")
 
     respond_to do |format|
       format.html # show.html.erb

@@ -4,7 +4,6 @@
   %tbody
     - @tours.each do |tour|
       %tr
-        %td= link_to"#{tour.name}"
+        %td= link_to"#{tour.name}", tour_url(tour)
         %td= "#{tour.shows.first.date} - #{tour.shows.last.date}"
         %td= tour.shows.count
-          

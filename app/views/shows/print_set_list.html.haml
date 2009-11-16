@@ -2,6 +2,6 @@
 
 - @show.show_set_lists.each_with_index do |show_set_list, i|
   %br
-  %h2= show_set_list.name || ( (show_set_lists.size - 1) == i ? "Encore:" : "Set #{i}:" )
+  %h2= show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:" )
   - show_set_list.set_list.song_performances.each do |sp|
     %h3= "#{sp.song.name}#{sp.segue? ? " >" : ","}" + (sp.notes ? "  (#{sp.notes})" : "")

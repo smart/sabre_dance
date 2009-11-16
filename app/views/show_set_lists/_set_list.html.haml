@@ -1,5 +1,4 @@
 .set_list{:id => "set_list_#{set_list.id}"}
-  %h4= set_list.name
   %ol{:id => "song_performances_#{set_list.id}"}
     - set_list.song_performances.each do |sp|
       %li{:id => "song_performance_#{sp.id}"}
@@ -9,6 +8,6 @@
         %br{:clear => "all"}
         = observe_field("song_performance_notes_#{sp.id}" , :url => update_notes_song_performance_url(sp), :with => "notes")
   .new_song{:background_color => "#FFCC22", :width => 399, :id => "set_list_new_song_#{set_list.id}"}
-    Drag Song Here
+    Drag Song From Left Here To Add To Set List
   = drop_receiving_element("set_list_new_song_#{set_list.id}", :update => "set_list_#{set_list.id}", :hoverclass => "new_song_hover", :url => set_list_song_performances_url(set_list), :with => "'song_performance[song_id]=' + encodeURIComponent(element.id.split('_').pop())")
   = sortable_element "song_performances_#{set_list.id}", :with => "Sortable.serialize(\"song_performances_#{set_list.id}\", {name : 'song_performance_ids'})", :url => sort_set_list_url(set_list)

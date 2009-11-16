@@ -20,20 +20,50 @@ body
   +blueprint-interaction
   :font-size 62.5%
   :font-family "lucida grande",tahoma,verdana,arial,sans-serif
+  a.right_button
+    :float right
   .container
     +container
+    ol
+      :padding-left 8px
+    ul
+      :list-style-type none
+    #top
+      +column(20, true)
+      +clearfix
+      h1
+        :float left
+      .sub_header
+        :float left
     #left_bar
       +column(6)
+      
     #main
-      +column(12, true)
+      :border-left 4px solid #E5E5E5
+      :padding 10px
+      +column(14, true)
       
       .show_set_list
-        :background-color green
-        :margin 10px
+        :-moz-background-clip border
+        :-moz-background-inline-policy continuous 
+        :-moz-background-origin padding
+        :background #F7F7F7 none repeat scroll 0 0
+        :border 1px solid #BBBBBB
+        :margin 0 0 20px
+        :overflow hidden
+        :padding 0
+        :position relative
+        .show_set_list_title
+          :padding 10px 10px 0px 10px
+        .new_song
+          :font-weight bold 
+          :border 2px dashed #BBBBBB
+          :padding 4px
         .new_song_hover
           :background-color #333333
         .song_performance_name
-          :float left   
+          :float left
+          :font-size 120%   
         .song_performance_segue
           :float left
           :width 14px
@@ -41,6 +71,19 @@ body
           :top 5px
           :left 5px
           :font-weight bold
+          :padding 4px
+          :font-size 120%
+          :border 1px dotted black
+          :font-size 120% 
+          :text-align middle
+          :text-decoration none
+          :-moz-background-clip border
+          :-moz-background-inline-policy continuous
+          :-moz-background-origin padding
+          :-moz-border-radius-bottomleft 2px
+          :-moz-border-radius-bottomright 2px
+          :-moz-border-radius-topleft 2px
+          :-moz-border-radius-topright 2px
         .song_performance_notes
           :float right
         .segue
@@ -54,6 +97,8 @@ body
 
 @import partials/colors.sass
 @import partials/header.sass
+@import partials/sexy_buttons.sass
+@import partials/song_box.sass
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body.three-col

@@ -19,22 +19,53 @@ class Show < ActiveRecord::Base
   end
 
   def self.create_by_pt_id(id)
-    pt_data = PhantasyTour.new.show_info_from_id(id)
-    show = new
-    show.date = pt_data[:date]
-    show.pt_id = pt_data[:pt_id]
-    show.tour = Tour.find_or_create_by_pt_id(pt_data[:pt_tour_id]) if pt_data[:pt_tour_id].to_i > 0
-    show.venue = Venue.find_or_create_by_pt_id(pt_data[:pt_venue_id]) if pt_data[:pt_venue_id].to_i > 0
-    show.show_set_list_from_pt_data(pt_data[:show_setlist])
-    show.set_lists.each{|de| p de.songs }
+    #pt_data = PhantasyTour.new.show_info_from_id(id)
+    show = new(:pt_id => id)
+    show.set_pt_show_info
+    show.set_pt_set_list
     show.save!
     show
   end
 
+  def update_pt_show_info
+    set_pt_show_info
+    save
+  end
+
+  def update_pt_set_list
+    set_pt_set_list
+    save
+  end
+
+  def set_pt_show_info
+    self.date = pt_info[:date]
+    self.name = pt_info[:show_name]
+    self.pt_id = pt_info[:pt_id]
+    self.tour = Tour.find_or_create_by_pt_id(pt_info[:pt_tour_id]) if pt_info[:pt_tour_id].to_i > 0
+    self.venue = Venue.find_or_create_by_pt_id(pt_info[:pt_venue_id]) if pt_info[:pt_venue_id].to_i > 0
+  end
+
+  def set_pt_set_list
+    self.show_set_list_from_pt_data(pt_info[:show_setlist])
+  end
+
   def show_set_list_from_pt_data(setlist_data)
+    self.set_lists.destroy_all
     setlist_data.each do |list|
       self.set_lists << SetList.new_from_pt_data(list)
     end
+  end
+
+  def upcoming?
+    date >= Date.today
+  end
+
+  def default_set_lists
+    return true unless set_lists.empty?
+    ["Set I", "Set II", "Encore"].each do |set|
+      self.show_set_lists << ShowSetList.new(:name => set, :set_list => SetList.new(:name => set))
+    end
+    save
   end
 
   def pt_info

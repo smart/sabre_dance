@@ -33,16 +33,22 @@ class PhantasyTour
     doc = page.parser
     item = doc.search("//td[contains(text(), 'Show Details')]/../../tr[2]/td")
     info[:pt_id] = url.split("=").last.to_i
-    info[:date] = Date.parse((item/"b").inner_text)
+    bold_items = (item/"b")
+    bold_items.shift if bold_items.inner_text.include?("CANCEL")
+    info[:date] = Date.parse(bold_items.shift.try(:inner_text))
+    info[:show_name] = bold_items.shift.try(:inner_text)
     links = (item/"a")
-    if links.size > 1
-      tour = links.shift
-      info[:tour_name] = tour.inner_text
-      info[:pt_tour_id] = tour.attribute("href").value.gsub("tours.cgi?tourID=", "").to_i
-    end
-    if venue = links.shift
-      info[:venue_name] = venue.inner_text
-      info[:pt_venue_id] = venue.attribute("href").value.gsub("venues.cgi?venueID=", "").to_i
+    links.each do |link|
+      if link.attribute("href").value.include?("tours.cgi?tourID=")
+        info[:tour_name] = link.inner_text
+        info[:pt_tour_id] = link.attribute("href").value.gsub("tours.cgi?tourID=", "").to_i
+      elsif link.attribute("href").value.include?("venues.cgi?venueID=")
+        info[:venue_name] = link.inner_text
+        info[:pt_venue_id] = link.attribute("href").value.gsub("venues.cgi?venueID=", "").to_i
+      else
+        info[:show_name] = link.inner_text.strip
+        info[:show_link] = link.attribute("href").value
+      end
     end
 
 

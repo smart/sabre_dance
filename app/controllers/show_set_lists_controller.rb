@@ -2,6 +2,7 @@ class ShowSetListsController < ApplicationController
   # GET /show_set_lists
   # GET /show_set_lists.xml
   def index
+    show.default_set_lists
     @show_set_lists = show.show_set_lists.all
     @tour = show.tour
 

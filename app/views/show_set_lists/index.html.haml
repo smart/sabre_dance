@@ -1,20 +1,23 @@
-%h1 Build a Set List
-= link_to "Print Set List", print_set_list_show_url(@show), :popup => true
-#left_bar
-  %ol
-    - @tour.song_stats.each do |song|
-      %li{:id => "tour_#{song.id}"}= "#{song.name} (#{song.plays})"
-      =draggable_element("tour_#{song.id}", :revert => true, :ghosting => true)
+#top
+  = sexy_button_to "Print Set List", print_set_list_show_url(@show), :popup => true, :class => "right_button"
+  %h1= "Set List Builder:"
+  %span.sub_header= "#{@show.date}" + (@show.venue ? " #{@show.venue.name}, #{@show.venue.city} #{@show.venue.state}" : "")
 
+#left_bar
+  %ul
+    %li= render :partial => "shared/song_box", :locals => {:songs => @tour.song_stats, :header => "Tour Songs", :description => "Songs played this tour ordered by number of times played"}
+    %li= render :partial => "shared/song_box", :locals => {:songs => Song.by_frequency.find(:all, :order => "plays desc"), :description => "All songs ever played ordered by number of times played", :header => "All Songs"}
 #main
   - @show_set_lists.each_with_index do |show_set_list, i|
-    .show_set_list
-      .show_set_list_title
-        %h4=show_set_list.name
-        = link_to_remote "delete", :method => :delete, :url => show_set_list_url(show_set_list)
+    .show_set_list{:id => "show_set_list_#{show_set_list.id}"}
+      .show_set_list_title.clearfix
+        = link_to_function('show/hide', "Element.toggle('set_list_#{show_set_list.set_list.id}')", :class => "set-communications-button right_button")
+        %h2{:style => "float:left;"}=show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:")
+        = link_to_remote "(delete)", :method => :delete, :url => show_set_list_url(show_set_list), :html => {:style => "float:left;padding: 10px 0px 0px 10px;"}
+
       = render :partial => "show_set_lists/set_list", :locals => {:set_list => show_set_list.set_list}
 
 
 
 
-= link_to 'New show_set_list', new_show_show_set_list_path(@show)
+  = sexy_button_to 'New show_set_list', new_show_show_set_list_path(@show)

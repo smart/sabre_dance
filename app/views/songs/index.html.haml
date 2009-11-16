@@ -6,6 +6,7 @@
       %tr
         %td= link_to song.name, song_url(song)
         %td= (song.original? ? "original" : "cover") + " by #{song.author}"
-        %td= "First Played: #{song.song_performances.first.show.date}"
-        %td= "Last Played: #{song.song_performances.last.show.date}"
+        - if song.song_performances.count > 0
+          %td= "First Played: #{song.song_performances.first.show.date}" 
+          %td= "Last Played: #{song.song_performances.last.show.date}"
         %td= "Num times: #{song.song_performances.count}"

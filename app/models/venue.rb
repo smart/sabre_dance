@@ -2,8 +2,8 @@ class Venue < ActiveRecord::Base
   has_many :shows
   has_many :songs,  :through => :shows
   validates_uniqueness_of :pt_id
-  acts_as_mappable :auto_geocode=>true
-
+  #acts_as_mappable :auto_geocode=>true
+  before_validation_on_create :geocode_address
 
   def self.find_or_create_by_pt_id(id)
     find_by_pt_id(id) || create_by_pt_id(id)
@@ -24,4 +24,12 @@ class Venue < ActiveRecord::Base
     venue.save!
     venue
   end
+
+  private
+  def geocode_address
+      geo=Geokit::Geocoders::MultiGeocoder.geocode(address)
+      #errors.add(:address, "Could not Geocode address") if !geo.success
+      self.lat, self.lng = geo.lat,geo.lng if geo.success
+    end
+
 end

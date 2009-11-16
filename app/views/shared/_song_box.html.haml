@@ -1,0 +1,11 @@
+.song_box
+  %h5= header
+  .box_hider= link_to_function('show/hide', "Element.toggle('#{header.underscore.downcase}_song_box')", :class => "set-communications-button")
+  .song_content{:id => "#{header.underscore.downcase}_song_box"}
+    %h4
+      %small= description
+    .inside
+      %ol
+        - songs.each do |song|
+          %li{:id => "tour_#{song.id}"}= "#{song.name} "+ (song.respond_to?(:plays) ? "(#{song.plays})" : "")
+          =draggable_element("tour_#{song.id}", :revert => true, :ghosting => true)
