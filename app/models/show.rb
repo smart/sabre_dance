@@ -9,7 +9,7 @@ class Show < ActiveRecord::Base
   validates_presence_of :date
   validates_uniqueness_of :pt_id
 
-  before_save :ensure_venue
+  #before_save :ensure_venue
 
   named_scope :upcoming, :conditions => ["shows.date >= ?", Date.today]
   named_scope :played, :conditions => ["shows.date < ?", Date.today]

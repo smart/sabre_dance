@@ -7,6 +7,7 @@
   %ul
     %li= render :partial => "shared/song_box", :locals => {:songs => @tour.song_stats, :header => "Tour Songs", :description => "Songs played this tour ordered by number of times played"}
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.by_frequency.find(:all, :order => "plays desc"), :description => "All songs ever played ordered by number of times played", :header => "All Songs"}
+    %li= render :partial => "shared/song_box", :locals => {:songs => Song.played_near_recently(@show.venue.address), :description => "All songs played within 40 mile radius in last 3 years", :header => "Played Here Recently"}
 #main
   - @show_set_lists.each_with_index do |show_set_list, i|
     .show_set_list{:id => "show_set_list_#{show_set_list.id}"}

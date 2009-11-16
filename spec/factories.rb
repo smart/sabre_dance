@@ -25,6 +25,7 @@ end
 
 Factory.define(:venue) do |v|
   v.name "Calvin Theatre"
+  v.sequence(:pt_id){|de| de + 1 }
 
 end
 

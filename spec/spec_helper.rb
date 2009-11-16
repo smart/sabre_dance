@@ -8,7 +8,7 @@ require 'factory_girl'
 require 'factories'
 require 'fakeweb'
 
-FakeWeb.allow_net_connect = false
+#FakeWeb.allow_net_connect = false
 
 #CONNECTIONS
 file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "tour_39.html")).to_s

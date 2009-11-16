@@ -11,6 +11,22 @@ class Song < ActiveRecord::Base
                               :joins => [{:song_performances => {:set_list => {:show_set_list => :show}}}],
                               :conditions => ["tour_id = ?", id], :group => "songs.id, songs.name"
 
+  named_scope :played_at_venues, lambda{|venues|
+                                  { :select => "songs.name, songs.id, COUNT(song_performances.id) as plays, MAX(shows.date) as last_played_on",
+                                    :joins => {:song_performances => {:set_list => {:show_set_list => {:show => :venue}}}},
+                                    :conditions => ["venues.id IN (?)", venues],
+                                    :group => "songs.id, songs.name", :order => "plays desc" }}
+
+  def self.played_in_radius(address, radius = 40)
+    venues = Venue.find(:all, :origin => address, :within => radius)
+    played_at_venues(venues)
+  end
+
+  def self.played_near_recently(address, radius = 40, date_back = 3.years.ago )
+    venues = Venue.find(:all, :origin => address, :within => radius)
+    played_at_venues(venues).find(:all, :conditions => ["shows.date > ?", date_back])
+  end
+
   def self.find_or_create_by_pt_id(id)
     find_by_pt_id(id) || create_by_pt_id(id)
   end
