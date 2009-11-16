@@ -77,11 +77,11 @@ class SongPerformancesController < ApplicationController
   # DELETE /song_performances/1.xml
   def destroy
     @song_performance = SongPerformance.find(params[:id])
+    set_list = @song_performance.set_list
     @song_performance.destroy
 
     respond_to do |format|
-      format.html { redirect_to(song_performances_url) }
-      format.xml  { head :ok }
+     format.all { render :partial  => "show_set_lists/set_list.html.haml", :locals => {:set_list => set_list}}
     end
   end
 
