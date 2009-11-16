@@ -9,6 +9,10 @@ class CreateShows < ActiveRecord::Migration
       t.text :notes
       t.timestamps
     end
+    add_index(:shows, :pt_id)
+    add_index(:shows, :tour_id)
+    add_index(:shows, :venue_id)
+    add_index(:shows, :name)
   end
 
   def self.down

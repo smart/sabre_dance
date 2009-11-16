@@ -5,6 +5,8 @@ class CreateTours < ActiveRecord::Migration
       t.integer :pt_id
       t.timestamps
     end
+    add_index(:tours, :pt_id)
+    add_index(:tours, :name)
   end
 
   def self.down

@@ -9,6 +9,8 @@ class CreateSongs < ActiveRecord::Migration
       t.integer :band_rank, :fan_rank
       t.timestamps
     end
+    add_index(:songs, :name)
+    add_index(:songs, :pt_id)
   end
 
   def self.down

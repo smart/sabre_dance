@@ -8,6 +8,8 @@ class CreateShowSetLists < ActiveRecord::Migration
       t.string :notes
       t.timestamps
     end
+    add_index(:show_set_lists, :show_id)
+    add_index(:show_set_lists, :set_list_id)
   end
 
   def self.down

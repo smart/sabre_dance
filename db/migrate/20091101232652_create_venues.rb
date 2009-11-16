@@ -5,6 +5,8 @@ class CreateVenues < ActiveRecord::Migration
       t.string :name, :street1, :street2, :city, :state, :zip, :country, :phone, :website
       t.timestamps
     end
+
+    add_index(:venues, :pt_id)
   end
 
   def self.down

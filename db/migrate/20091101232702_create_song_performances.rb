@@ -8,6 +8,8 @@ class CreateSongPerformances < ActiveRecord::Migration
       t.boolean :segue, :null => false, :default => false
       t.timestamps
     end
+    add_index(:song_performances, :song_id)
+    add_index(:song_performances, :set_list_id)
   end
 
   def self.down
