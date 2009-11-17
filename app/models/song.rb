@@ -1,7 +1,8 @@
 class Song < ActiveRecord::Base
   validates_presence_of :name
   has_many :song_performances
-  validates_uniqueness_of :pt_id
+  validates_presence_of :name
+  validates_uniqueness_of :pt_id, :allow_nil => true
 
   named_scope :by_frequency, :select => "songs.id, songs.name, count(song_performances.id) as plays",
                              :joins => :song_performances, :group => "songs.id, songs.name "
