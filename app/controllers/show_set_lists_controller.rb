@@ -61,10 +61,11 @@ class ShowSetListsController < ApplicationController
   # DELETE /show_set_lists/1.xml
   def destroy
     @show_set_list = ShowSetList.find(params[:id])
+    @show = @show_set_list.show
     @show_set_list.destroy
 
     respond_to do |format|
-      format.html { redirect_to(show_set_lists_url) }
+      format.html { redirect_to(show_show_set_lists_url(@show)) }
       format.xml  { head :ok }
     end
   end
