@@ -17,10 +17,13 @@ class Song < ActiveRecord::Base
                                     :conditions => ["venues.id IN (?)", venues],
                                     :group => "songs.id, songs.name"}}
 
+  named_scope :not_yet_played, {:select => "songs.id, songs.name", :joins => "LEFT OUTER JOIN song_performances ON songs.id  = song_performances.song_id",  :group => "songs.name, songs.id", :conditions => "song_performances.id IS NULL"}
+
   named_scope :originals, {:conditions => {:original => true} }
   named_scope :covers, {:conditions => {:original => false} }
 
   named_scope :order_by_plays, :order => "plays desc"
+
 
 
   def self.played_in_radius(address, radius = 40)
