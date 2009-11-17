@@ -10,6 +10,11 @@ class SongPerformancesController < ApplicationController
     end
   end
 
+  def show
+    @song_performance = set_list.song_performances.find(params[:id])
+    render :partial => "song_performances/show.html.haml", :locals => {:song_performance => @song_performance, :set_list => set_list}
+  end
+
   # GET /song_performances/new
   # GET /song_performances/new.xml
   def new
@@ -21,9 +26,11 @@ class SongPerformancesController < ApplicationController
     end
   end
 
+
   # GET /song_performances/1/edit
   def edit
-    @song_performance = SongPerformance.find(params[:id])
+    @song_performance = set_list.song_performances.find(params[:id])
+    render :partial => "song_performances/edit.html.haml", :locals => {:song_performance => @song_performance, :set_list => set_list}
   end
 
   # POST /song_performances
@@ -32,7 +39,7 @@ class SongPerformancesController < ApplicationController
     @song_performance = set_list.song_performances.new(params[:song_performance])
 
     respond_to do |format|
-      if @song_performance.save
+      if @song_performance.save!
         flash[:notice] = 'SongPerformance was successfully created.'
         #format.html { redirect_to(@song_performance) }
         #format.xml  { render :xml => @song_performance, :status => :created, :location => @song_performance }
@@ -48,6 +55,19 @@ class SongPerformancesController < ApplicationController
     @song_performance = SongPerformance.find(params[:id])
     @song_performance.toggle!(:segue)
     render :partial => "song_performances/segue", :locals => {:song_performance => @song_performance}
+
+  end
+
+  def toggle_tag
+    @song_performance = SongPerformance.find(params[:id])
+    if found_tag = @song_performance.tags.find_by_id(params[:tag_id])
+      p "WE MADE IT"
+      @song_performance.tag_list.delete(found_tag.name)
+    else
+      @song_performance.tag_list << Tag.find_by_id(params[:tag_id]).name
+    end
+    @song_performance.save!
+    render :partial => "song_performances/edit.html.haml", :locals => {:song_performance => @song_performance, :set_list => @song_performance.set_list}
 
   end
 

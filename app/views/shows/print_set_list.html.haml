@@ -4,4 +4,4 @@
   %br
   %h2= show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:" )
   - show_set_list.set_list.song_performances.each do |sp|
-    %h3= "#{sp.song.name}#{sp.segue? ? " >" : ","}" + (sp.notes ? "  (#{sp.notes})" : "")
+    %h3= (sp.tag_list.include?("inverted") ? "<b>[X] </b>" : "") + "#{sp.song.name}#{sp.segue? ? " >" : ","}" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-size: 75%;\">" + (sp.tag_list.reject{|de| de == "inverted"} + [sp.notes]).compact.join(", &nbsp;") +  "</span>"

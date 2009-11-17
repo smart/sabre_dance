@@ -7,5 +7,5 @@
     .inside
       %ol
         - songs.each do |song|
-          %li{:id => "tour_#{song.id}"}= "#{song.name} "+ (song.respond_to?(:plays) ? "(#{song.plays})" : "")
-          =draggable_element("tour_#{song.id}", :revert => true, :ghosting => true)
+          %li{:id => "#{header.sub(" ", "").underscore}_#{song.id}"}= "#{song.name} "+ (song.respond_to?(:plays) ? "(#{song.plays})" : "")
+          =draggable_element("#{header.sub(" ", "").underscore}_#{song.id}", :revert => true, :ghosting => true)

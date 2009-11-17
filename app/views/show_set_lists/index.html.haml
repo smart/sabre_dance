@@ -6,8 +6,9 @@
 #left_bar
   %ul
     %li= render :partial => "shared/song_box", :locals => {:songs => @tour.song_stats, :header => "Tour Songs", :description => "Songs played this tour ordered by number of times played"}
-    %li= render :partial => "shared/song_box", :locals => {:songs => Song.by_frequency.find(:all, :order => "plays desc"), :description => "All songs ever played ordered by number of times played", :header => "All Songs"}
-    %li= render :partial => "shared/song_box", :locals => {:songs => Song.played_near_recently(@show.venue.address), :description => "All songs played within 40 mile radius in last 3 years", :header => "Played Here Recently"}
+    %li= render :partial => "shared/song_box", :locals => {:songs => Song.originals.by_frequency.order_by_plays, :description => "All original songs ever played ordered by number of times played", :header => "Original Songs"}
+    %li= render :partial => "shared/song_box", :locals => {:songs => Song.by_frequency.covers.order_by_plays, :description => "All cover songs ever played ordered by number of times played", :header => "Cover Songs"}
+    %li= render :partial => "shared/song_box", :locals => {:songs => Song.order_by_plays.played_near_recently(@show.venue.address), :description => "All songs played within 40 mile radius in last 3 years", :header => "Played Here Recently"}
 #main
   - @show_set_lists.each_with_index do |show_set_list, i|
     .show_set_list{:id => "show_set_list_#{show_set_list.id}"}
@@ -17,7 +18,6 @@
         = link_to_remote "(delete)", :method => :delete, :url => show_set_list_url(show_set_list), :html => {:style => "float:left;padding: 10px 0px 0px 10px;"}
 
       = render :partial => "show_set_lists/set_list", :locals => {:set_list => show_set_list.set_list}
-
 
 
 

@@ -1,14 +1,8 @@
 .set_list{:id => "set_list_#{set_list.id}"}
-  %ol{:id => "song_performances_#{set_list.id}"}
+  %ul{:id => "song_performances_#{set_list.id}"}
     - set_list.song_performances.each do |sp|
-      %li{:id => "song_performance_#{sp.id}"}
-        .song_performance_notes
-          = text_field_tag "song_performance_notes_#{sp.id}", sp.notes
-          = link_to_remote "X", :update => "set_list_#{set_list.id}", :before => visual_effect(:fade, "song_performance_#{sp.id}"), :method => :delete, :url => song_performance_url(sp)
-        .song_performance_name= sp.song.name
-        %span{:id => "song_performance_#{sp.id}_segue"}= render :partial => "song_performances/segue.html.haml", :locals => {:song_performance => sp}
-        %br{:clear => "all"}
-        = observe_field("song_performance_notes_#{sp.id}" , :url => update_notes_song_performance_url(sp), :with => "notes")
+      %li{:id => "song_performance_#{sp.id}", :class => "song_performance_row"}
+        = render :partial => "song_performances/show.html.haml", :locals => {:song_performance => sp, :set_list => set_list}
   .new_song{:background_color => "#FFCC22", :width => 399, :id => "set_list_new_song_#{set_list.id}"}
     Drag Song From Left Here To Add To Set List
   = drop_receiving_element("set_list_new_song_#{set_list.id}", :update => "set_list_#{set_list.id}", :hoverclass => "new_song_hover", :url => set_list_song_performances_url(set_list), :with => "'song_performance[song_id]=' + encodeURIComponent(element.id.split('_').pop())")

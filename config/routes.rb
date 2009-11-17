@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :tours
 
-  map.resources :song_performances, :member => {:toggle_segue  => :any, :update_notes => :any}
+  map.resources :song_performances, :member => {:toggle_segue  => :any, :toggle_tag => :any, :update_notes => :any}
 
   map.resources :venues
 

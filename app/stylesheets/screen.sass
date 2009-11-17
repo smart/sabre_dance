@@ -35,6 +35,10 @@ body
         :float left
       .sub_header
         :float left
+        :padding-top 10px
+        :padding-left 10px
+        :font-weight bold
+        :font-size 150%
     #left_bar
       +column(6)
       
@@ -61,35 +65,68 @@ body
           :padding 4px
         .new_song_hover
           :background-color #333333
-        .song_performance_name
-          :float left
-          :font-size 120%   
-        .song_performance_segue
-          :float left
-          :width 14px
-          :height 10px
-          :top 5px
-          :left 5px
-          :font-weight bold
-          :padding 4px
-          :font-size 120%
-          :border 1px dotted black
-          :font-size 120% 
-          :text-align middle
-          :text-decoration none
-          :-moz-background-clip border
-          :-moz-background-inline-policy continuous
-          :-moz-background-origin padding
-          :-moz-border-radius-bottomleft 2px
-          :-moz-border-radius-bottomright 2px
-          :-moz-border-radius-topleft 2px
-          :-moz-border-radius-topright 2px
-        .song_performance_notes
-          :float right
-        .segue
-          :background-color #FFCCCC
-        .stop
-          :background-color #CCCCFF
+        .song_performance_row
+          :border-top 1px solid #6E6E6E
+          .show
+            :background-color #D8DFEA
+          .editing
+            :background-color white
+            .song_performance_editor
+              :padding 10px
+            ul
+              :background-color #E5E5E5
+              li
+                :float left
+                :padding 4px
+                a
+                  :text-decoration none
+              li.tagged
+                a
+                  :font-weight bold
+                .not_tagged
+                
+            .song_performance_sub_header
+              :color #3F3D35
+              :font-size 115%
+              :font-weight bold
+          .song_perfomance_icons
+            :padding-left 2px
+            :padding-top 2px
+            :float left
+            :width 30px
+          .song_performance_name
+            :float left
+            :font-size 120%   
+          .song_performance_segue
+            :float left
+            :width 14px
+            :height 10px
+            :top 5px
+            :left 5px
+            :font-weight bold
+            :padding 4px
+            :font-size 120%
+            :border 1px dotted black
+            :font-size 120% 
+            :text-align middle
+            :text-decoration none
+            :-moz-background-clip border
+            :-moz-background-inline-policy continuous
+            :-moz-background-origin padding
+            :-moz-border-radius-bottomleft 2px
+            :-moz-border-radius-bottomright 2px
+            :-moz-border-radius-topleft 2px
+            :-moz-border-radius-topright 2px
+          .song_performance_notes
+            :float right
+            :padding-top 2px
+            span
+              :font-size 90%
+              :padding 0px 4px 1px 2px
+          .segue
+            :background-color #FFCCCC
+          .stop
+            :background-color #CCCCFF
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
   form

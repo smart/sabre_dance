@@ -15,7 +15,13 @@ class Song < ActiveRecord::Base
                                   { :select => "songs.name, songs.id, COUNT(song_performances.id) as plays, MAX(shows.date) as last_played_on",
                                     :joins => {:song_performances => {:set_list => {:show_set_list => {:show => :venue}}}},
                                     :conditions => ["venues.id IN (?)", venues],
-                                    :group => "songs.id, songs.name", :order => "plays desc" }}
+                                    :group => "songs.id, songs.name"}}
+
+  named_scope :originals, {:conditions => {:original => true} }
+  named_scope :covers, {:conditions => {:original => false} }
+
+  named_scope :order_by_plays, :order => "plays desc"
+
 
   def self.played_in_radius(address, radius = 40)
     venues = Venue.find(:all, :origin => address, :within => radius)
@@ -37,7 +43,6 @@ class Song < ActiveRecord::Base
     song.save!
     song
   end
-
 
   def phantasy_tour
     @pt ||= PhantasyTour.new
