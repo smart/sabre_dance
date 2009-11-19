@@ -9,6 +9,6 @@
             %span= sp.notes
           .song_perfomance_icons
           .song_performance_name= (sp.inverted? ? "<b>[X]</b>" : "") +  sp.song.name
-          %span{:id => "song_performance_#{sp.id}_segue"}
-            %em{:class => "song_performance_segue  #{sp.segue? ? "segue" : "stop"}"}= "#{sp.segue? ? ">" : ","}"
+          .song_performance_segue{:id => "song_performance_#{sp.id}_segue"}
+            %a{:href => "#", :class => "song_performance_segue  #{sp.segue? ? "segue" : "stop"}"}= "#{sp.segue? ? ">" : ","}"
           %br{:clear => "all"}

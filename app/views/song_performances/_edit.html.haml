@@ -4,7 +4,7 @@
   .song_perfomance_icons
     =link_to_remote image_tag("song_expanded.png"), :update => "song_performance_#{song_performance.id}", :method => :get, :url => set_list_song_performance_url(set_list, song_performance)
   .song_performance_name= (song_performance.tag_list.include?("inverted") ? "<b>[X]</b>" : "") +  song_performance.song.name
-  %song_performancean{:id => "song_performance_#{song_performance.id}_segue"}= render :partial => "song_performances/segue.html.haml", :locals => {:song_performance => song_performance}
+  .song_performance_segue{:id => "song_performance_#{song_performance.id}_segue"}= render :partial => "song_performances/segue.html.haml", :locals => {:song_performance => song_performance}
   .song_performance_editor
     %br{:clear => "all"}
     .song_performance_sub_header Tags:
@@ -16,4 +16,4 @@
     = text_area_tag "song_performance_notes_#{song_performance.id}", song_performance.notes, :cols => 50
     %br{:clear => "all"}
     %br{:clear => "all"}
-    = observe_field("song_performance_notes_#{song_performance.id}" , :url => update_notes_song_performance_url(song_performance), :with => "notes")
+    = observe_field("song_performance_notes_#{song_performance.id}" , :frequency => 1, :url => update_notes_song_performance_url(song_performance), :with => "notes")

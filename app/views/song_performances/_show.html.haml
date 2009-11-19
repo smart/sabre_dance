@@ -1,12 +1,12 @@
 .song_performance_content{:class => "show"}
   .song_performance_notes
-    -# song_performance.tags.select{|de| band_tags.include?(de)}.each do |tag|
-      %span= tag.name
+    - song_performance.tags.select{|de| band_tags.include?(de)}.each do |tag|
+      %span= tag.name + ", "
     %span= song_performance.notes
     = link_to_remote "X", :update => "set_list_#{set_list.id}", :before => visual_effect(:fade, "song_performance_#{song_performance.id}"), :method => :delete, :url => song_performance_url(song_performance)
   .song_perfomance_icons
     =link_to_remote image_tag("song_collapsed.png"), :method => :get, :update => "song_performance_#{song_performance.id}", :url => edit_set_list_song_performance_url(set_list, song_performance)
   .song_performance_name= (song_performance.tag_list.include?("inverted") ? "<b>[X]</b>" : "") +  song_performance.song.name
-  %song_performancean{:id => "song_performance_#{song_performance.id}_segue"}= render :partial => "song_performances/segue.html.haml", :locals => {:song_performance => song_performance}
+  .song_performance_segue{:id => "song_performance_#{song_performance.id}_segue"}= render :partial => "song_performances/segue.html.haml", :locals => {:song_performance => song_performance}
   %br{:clear => "all"}
   =# observe_field("song_performance_notes_#{song_performance.id}" , :url => update_notes_song_performance_url(song_performance), :with => "notes")

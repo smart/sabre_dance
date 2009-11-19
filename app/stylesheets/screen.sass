@@ -57,6 +57,10 @@ body
         :overflow hidden
         :padding 0
         :position relative
+        ul
+          :margin 0px
+          :margin-bottom 1.5em
+          :border-bottom 1px solid #bbbbbb
         .show_set_list_title
           :padding 10px 10px 0px 10px
         .new_song
@@ -68,7 +72,7 @@ body
         .song_performance_row
           :border-top 1px solid #6E6E6E
           .show
-            :background-color #D8DFEA
+          
           .editing
             :background-color white
             .song_performance_editor
@@ -89,44 +93,63 @@ body
               :color #3F3D35
               :font-size 115%
               :font-weight bold
-          .song_perfomance_icons
-            :padding-left 2px
-            :padding-top 2px
-            :float left
-            :width 30px
-          .song_performance_name
-            :float left
-            :font-size 120%   
-          .song_performance_segue
-            :float left
-            :width 14px
-            :height 10px
-            :top 5px
-            :left 5px
-            :font-weight bold
+          .song_performance_content
             :padding 4px
-            :font-size 120%
-            :border 1px dotted black
-            :font-size 120% 
-            :text-align middle
-            :text-decoration none
-            :-moz-background-clip border
-            :-moz-background-inline-policy continuous
-            :-moz-background-origin padding
-            :-moz-border-radius-bottomleft 2px
-            :-moz-border-radius-bottomright 2px
-            :-moz-border-radius-topleft 2px
-            :-moz-border-radius-topright 2px
-          .song_performance_notes
-            :float right
-            :padding-top 2px
-            span
-              :font-size 90%
-              :padding 0px 4px 1px 2px
-          .segue
-            :background-color #FFCCCC
-          .stop
-            :background-color #CCCCFF
+            .song_perfomance_icons
+              :padding-left 2px
+              :padding-top 2px
+              :float left
+              :width 30px
+            .song_performance_name
+              :cursor move
+              :float left
+              :font-size 120%   
+            .song_performance_segue
+              :float left
+              :margin-left 7px
+              :width 14px
+              :height 10px
+              :text-align middle
+              :text-decoration none
+              .segue  
+                :border 1px solid #BBBBBB
+                :width 14px
+                :text-align center
+                :display block
+                :-moz-background-clip border
+                :-moz-background-inline-policy continuous
+                :-moz-background-origin padding
+                :-moz-border-radius-bottomright 6px
+                :-moz-border-radius-topleft 6px
+                :-moz-border-radius-topright 6px
+                :-moz-border-radius-bottomleft 6px
+                :background-color #FFCCCC
+              .stop
+                :border 1px solid #BBBBBB
+                :width 14px
+                :text-align center
+                :display block
+                :-moz-background-clip border
+                :-moz-background-inline-policy continuous
+                :-moz-background-origin padding
+                :-moz-border-radius-bottomright 6px
+                :-moz-border-radius-topleft 6px
+                :-moz-border-radius-topright 6px
+                :-moz-border-radius-bottomleft 6px
+                :background-color #CCCCFF
+              a
+                :text-decoration none
+                :font-weight bold
+                :font-color #BBBBBB
+                :font-size 120%
+
+            .song_performance_notes
+              :float right
+              :padding-top 2px
+              span
+                :font-size 90%
+                :padding 0px 4px 1px 2px
+        
   // Remove the scaffolding when you're ready to start doing visual design.
   // Or leave it in if you're happy with how blueprint looks out-of-the-box
   form
