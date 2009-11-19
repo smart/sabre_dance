@@ -5,7 +5,8 @@
 
 #left_bar
   %ul
-    %li= render :partial => "shared/song_box", :locals => {:songs => @tour.song_stats, :header => "Played This Tour", :description => "Songs played this tour ordered by number of times played"}
+    - if @tour
+      %li= render :partial => "shared/song_box", :locals => {:songs => @tour.song_stats, :header => "Played This Tour", :description => "Songs played this tour ordered by number of times played"}
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.originals.by_frequency.order_by_plays, :description => "All original songs ever played ordered by number of times played", :header => "Original Songs"}
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.by_frequency.covers.order_by_plays, :description => "All cover songs ever played ordered by number of times played", :header => "Cover Songs"}
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.order_by_plays.played_near_recently(@show.venue.address), :description => "All songs played within 40 mile radius in last 3 years", :header => "Played Here Recently"}
