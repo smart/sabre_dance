@@ -17,4 +17,8 @@ class SongPerformance < ActiveRecord::Base
     sp.song = Song.find_or_create_by_pt_id(pt_data[:pt_song_id])
     sp
   end
+
+  def inverted?
+    tag_list.any?{|tg| tg.downcase.include?("inverted") }
+  end
 end
