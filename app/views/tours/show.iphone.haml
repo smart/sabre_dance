@@ -1,0 +1,6 @@
+= te_navigation_bar({:back => true, :caption => "Back"}, @tour.name)
+%ul{:selected => true}
+  -  @shows.each do |date_key, show_objs|
+    %li{:class => "group"}= date_key
+    - show_objs.each do |s|
+      %li=link_from_list(show_text(s), show_url(s))

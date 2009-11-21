@@ -2,11 +2,12 @@ class ToursController < ApplicationController
   # GET /tours
   # GET /tours.xml
   def index
-    @tours = Tour.all
+    @tours = Tour.by_date_of_first_show
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tours }
+      format.iphone
     end
   end
 
@@ -20,6 +21,9 @@ class ToursController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @tour }
+      format.iphone do
+        @shows = @tour.shows.find(:all, :order => "date desc").group_by {|show| (show.upcoming? ? "Upcoming Shows" : "Past Shows") }
+        end
     end
   end
 

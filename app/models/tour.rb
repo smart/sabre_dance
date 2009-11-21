@@ -4,6 +4,10 @@ class Tour < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :pt_id
 
+  named_scope :by_date_of_first_show, lambda {
+    {:select => "tours.*, MIN(shows.date) as first_show_date", :joins => "LEFT OUTER JOIN shows ON tours.id = shows.tour_id", :group => "tours.id, tours.name, tours.pt_id, tours.created_at, tours.updated_at", :order => "first_show_date desc"}
+  }
+
   def self.find_or_create_by_pt_id(id)
     find_by_pt_id(id) || create_by_pt_id(id)
   end

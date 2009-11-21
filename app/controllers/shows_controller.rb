@@ -1,4 +1,5 @@
 class ShowsController < ApplicationController
+  include ShowsHelper
   # GET /shows
   # GET /shows.xml
   def index
@@ -7,6 +8,12 @@ class ShowsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }
+      format.iphone do
+         @title     = "Shows"
+          @left_nav  = { :back => true, :caption => 'Back', :url => "/", :html_options => {} }
+          @right_nav = { :caption => 'Home', :url => "/welcome", :html_options => {} }
+          @list      = @shows.map { |i| ListModel.new( i, show_text(i), show_url(i)) }
+      end
     end
   end
 
@@ -25,6 +32,11 @@ class ShowsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @show }
+      format.iphone do
+        @title     = "Shows"
+        @left_nav  = { :back => true, :caption => 'Back', :html_options => {} }
+        #@right_nav = { :caption => 'Home', :url => "/welcome", :html_options => {} }
+      end
     end
   end
 

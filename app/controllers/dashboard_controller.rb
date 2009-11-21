@@ -8,6 +8,9 @@ class DashboardController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @venues }
+      format.iphone do
+        @list = [ListModel.new(nil, "Shows", shows_url), ListModel.new(nil, "Tours", tours_url) , ListModel.new(nil, "Songs", songs_url)]
+      end
     end
   end
 

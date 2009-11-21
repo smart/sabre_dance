@@ -1,0 +1,2 @@
+= te_navigation_bar({ :caption => 'Back', :back => true, :html_options => {} }, "Tours", {})
+= te_list @tours.collect{|tour| ListModel.new(tour, tour.name, tour_path(tour))}
