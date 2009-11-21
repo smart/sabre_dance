@@ -5,12 +5,24 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charjuqeset=UTF-8" />
   <title></title>
-  <meta name = "viewport" content = "width = device-width, user-scalable=no 
-      minimum-scale=1.0 maximum-scale=1.0"> 
-  <%# javascript_include_tag :defaults %>
+  <meta name = "viewport" content = "width = device-width, user-scalable=no
+      minimum-scale=1.0 maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <%= javascript_include_tag "jquery" %>
   <%= include_tank_engine_files %>
   <%= yield :jquery %>
-  <%# javascript_include_tag "tank_engine" %>
+  <% javascript_include_tag "tank_engine" %>
+  <script language="javascript" type="text/javascript">
+     <!--
+      window.addEventListener("load", function() { setTimeout(loaded, 100) }, false);
+      function loaded() {
+        document.getElementById("toolbar").style.visibility = "visible";
+        window.scrollTo(0, 1); // pan to the bottom, hides the location bar
+      }
+    //-->
+  </script>
 </head>
 <body>
 <div class="viewport_body">
