@@ -1,5 +1,5 @@
 -   @title     = "Show"
--    @left_nav  = { :back => true, :caption => 'Back', :html_options => {} }
+-    @left_nav  = { :back => true, :url => :back, :caption => 'Back', :html_options => {} }
 -    @right_nav = { :caption => 'Home', :url => "/welcome", :html_options => {} }
 = te_navigation_bar @left_nav, @title
 %h1=# "#{@show.date}" + (@show.venue ? " #{@show.venue.name}, #{@show.venue.city} #{@show.venue.state}" : "")
@@ -9,4 +9,4 @@
   - @show.show_set_lists.each_with_index do |show_set_list, i|
     %li{:class => "group"}=show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:")
     - show_set_list.set_list.song_performances.each do |sp|
-      %li= sp.song.name
+      %li=  song_performance_for_set_list(sp)

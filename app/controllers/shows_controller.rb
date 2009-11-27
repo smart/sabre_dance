@@ -10,7 +10,7 @@ class ShowsController < ApplicationController
       format.xml  { render :xml => @shows }
       format.iphone do
          @title     = "Shows"
-          @left_nav  = { :back => true, :caption => 'Back', :url => "/", :html_options => {} }
+          @left_nav  = { :back => true, :caption => 'Back', :url => :back, :html_options => {} }
           @right_nav = { :caption => 'Home', :url => "/welcome", :html_options => {} }
           @list      = @shows.map { |i| ListModel.new( i, show_text(i), show_url(i)) }
       end
@@ -34,7 +34,7 @@ class ShowsController < ApplicationController
       format.xml  { render :xml => @show }
       format.iphone do
         @title     = "Shows"
-        @left_nav  = { :back => true, :caption => 'Back', :html_options => {} }
+        @left_nav  = { :back => true, :caption => 'Back', :url => :back, :html_options => {} }
         #@right_nav = { :caption => 'Home', :url => "/welcome", :html_options => {} }
       end
     end

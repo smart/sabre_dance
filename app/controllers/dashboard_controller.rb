@@ -18,6 +18,6 @@ class DashboardController < ApplicationController
 
   helper_method :current_tour
   def current_tour
-    @current_tour ||= Show.find(:first, :conditions => ["shows.date >= ?", Date.today], :order => "shows.date ASC").try(:tour)
+    @current_tour ||= Tour.last #Show.find(:first, :conditions => ["shows.date >= ?", Date.today], :order => "shows.date ASC").try(:tour)
   end
 end
