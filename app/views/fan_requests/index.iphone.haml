@@ -1,0 +1,15 @@
+-   @title     = "Fan Requests"
+-    @left_nav  = { :back => true, :url => :back, :caption => 'Back', :html_options => {} }
+-    @right_nav = { :caption => 'New', :url => new_fan_request_path, :html_options => {} }
+= te_navigation_bar @left_nav, @title, @right_nav
+%h1=# "#{@show.date}" + (@show.venue ? " #{@show.venue.name}, #{@show.venue.city} #{@show.venue.state}" : "")
+
+
+%ul{:selected => "true"}
+  - @fan_requests.group_by{|req| "#{req.show.date} #{req.show.venue.name}"}.each do |key, value|
+    %li{:class => "group"}=key
+    - value.each do |request|
+      %li
+        = request.song.name + " - " if request.song
+        = request.notes if request.notes
+        = "requested by: #{request.requested_by}" if request.requested_by

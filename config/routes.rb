@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :fan_requests
+
   map.resources :sequences
 
 

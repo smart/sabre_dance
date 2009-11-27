@@ -1,0 +1,17 @@
+- form_for @fan_request do |f|
+  .panel
+    %h2 New Request
+    %fieldset
+      .row
+        = f.label :show_id, "Show"
+        = f.select :show_id, Show.upcoming.collect{|sg| ["#{sg.date} #{sg.venue.name}", sg.id]}
+    %fieldset
+      .row
+        = f.label :song_id, "Song"
+        = f.select :song_id, Song.all.collect{|sg| [sg.name, sg.id]}
+      .row
+        = f.label :requested_by, "Requested By:"
+        = f.text_field :requested_by
+
+    = f.text_area :notes
+    = f.submit "Submit"

@@ -3,6 +3,7 @@ class Show < ActiveRecord::Base
   has_many :set_lists, :through => :show_set_lists
   has_many :song_performances, :through => :set_lists
   has_many :songs, :through => :set_lists
+  has_many :fan_requests
   belongs_to :tour
   belongs_to :venue
 

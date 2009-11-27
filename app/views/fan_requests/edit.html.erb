@@ -1,0 +1,12 @@
+<h1>Editing fan_request</h1>
+
+<% form_for(@fan_request) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @fan_request %> |
+<%= link_to 'Back', fan_requests_path %>

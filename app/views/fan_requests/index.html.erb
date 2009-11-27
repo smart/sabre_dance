@@ -1,0 +1,18 @@
+<h1>Listing fan_requests</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% @fan_requests.each do |fan_request| %>
+  <tr>
+    <td><%= link_to 'Show', fan_request %></td>
+    <td><%= link_to 'Edit', edit_fan_request_path(fan_request) %></td>
+    <td><%= link_to 'Destroy', fan_request, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New fan_request', new_fan_request_path %>

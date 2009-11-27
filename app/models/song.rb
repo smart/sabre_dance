@@ -1,6 +1,7 @@
 class Song < ActiveRecord::Base
   validates_presence_of :name
   has_many :song_performances
+  has_many :fan_requests
   validates_presence_of :name
   validates_uniqueness_of :pt_id, :allow_nil => true
 
@@ -25,6 +26,11 @@ class Song < ActiveRecord::Base
 
   named_scope :order_by_plays, :order => "plays desc"
 
+  named_scope :requested_for_show, lambda{ |show_id|
+                                     {:select => "songs.name as name, songs.id as id, COUNT(fan_requests.song_id) as plays",
+                                      :order => "plays desc",:joins => :fan_requests,
+                                      :conditions => ["fan_requests.show_id = ?", show_id], :group => "songs.id, songs.name" }}
+
 
 
   def self.played_in_radius(address, radius = 40)
@@ -40,6 +46,7 @@ class Song < ActiveRecord::Base
   def self.find_or_create_by_pt_id(id)
     find_by_pt_id(id) || create_by_pt_id(id)
   end
+
 
   def self.create_by_pt_id(id)
     pt_data = PhantasyTour.new.song_info_from_id(id)

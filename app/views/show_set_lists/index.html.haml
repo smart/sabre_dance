@@ -10,6 +10,7 @@
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.originals.by_frequency.order_by_plays, :description => "All original songs ever played ordered by number of times played", :header => "Original Songs"}
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.by_frequency.covers.order_by_plays, :description => "All cover songs ever played ordered by number of times played", :header => "Cover Songs"}
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.order_by_plays.played_near_recently(@show.venue.address), :description => "All songs played within 40 mile radius in last 3 years", :header => "Played Here Recently"}
+    %li= render :partial => "shared/song_box", :locals => {:songs => Song.requested_for_show(@show), :description => "Songs requested by fans for this show", :header => "Requested"}
     %li= render :partial => "shared/song_box", :locals => {:songs => Song.not_yet_played, :description => "Songs the band has not yet played live", :header => "Not Yet Played Live"}
 #main
   - @show_set_lists.each_with_index do |show_set_list, i|
