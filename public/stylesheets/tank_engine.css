@@ -257,16 +257,26 @@ input {
     font-weight: normal;
 }
 
+select {
+
+   -webkit-border-radius:10px;
+    margin: 8px 8px 8px 8px;
+    padding: 6px 6px 6px 64px;
+    font-size: 22px;
+    font-weight: normal;
+
+}
+
 /************************************************************************************************/
 
-body > .panel {
+.panel {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     padding: 10px;
     background: #c8c8c8 url(/images/tank_engine/pinstripes.png);
 }
 
-.panel > fieldset {
+fieldset {
     position: relative;
     margin: 0 0 20px 0;
     padding: 0;
