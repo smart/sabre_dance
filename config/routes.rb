@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :venues
 
-  map.resources :songs
+  map.resources :songs, :has_many => [:sequences]
 
   map.resources :shows, :member => {:print_set_list => :any} do |show|
     show.resources :show_set_lists

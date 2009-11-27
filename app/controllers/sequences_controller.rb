@@ -1,8 +1,12 @@
 class SequencesController < ApplicationController
+
+  def parent_names
+    ["song"]
+  end
   # GET /sequences
   # GET /sequences.xml
   def index
-    @sequences = Sequence.find(:all, :include => :show, :include => {:song_performances => [:tags, :song]})
+    @sequences = current_model.find(:all, :include => [{:song_performances => [:tags, :song]}, :show])
 
     respond_to do |format|
       format.html # index.html.erb

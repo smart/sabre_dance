@@ -2,6 +2,7 @@ class Song < ActiveRecord::Base
   validates_presence_of :name
   has_many :song_performances
   has_many :fan_requests
+  has_many :sequences, :through => :song_performances
   validates_presence_of :name
   validates_uniqueness_of :pt_id, :allow_nil => true
 

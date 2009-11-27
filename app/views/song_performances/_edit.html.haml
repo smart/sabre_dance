@@ -15,5 +15,12 @@
     .song_performance_sub_header Additional Notes:
     = text_area_tag "song_performance_notes_#{song_performance.id}", song_performance.notes, :cols => 50
     %br{:clear => "all"}
+    .song_performance_sub_header Most recent sequences:
+    - song_performance.song.sequences.formatted.find(:all, :limit => 10).each do |sequence|
+      = link_to"#{sequence.show.date}", show_url(sequence.show)
+      - sequence.song_performances.sort{|x,y| x.position <=> y.position }.each do |sp|
+        = song_performance_for_set_list(sp)
+      %br{:clear => "all"}
+      %br{:clear => "all"}
     %br{:clear => "all"}
     = observe_field("song_performance_notes_#{song_performance.id}" , :frequency => 1, :url => update_notes_song_performance_url(song_performance), :with => "notes")
