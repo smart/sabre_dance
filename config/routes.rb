@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :show_set_lists
 
-  map.resources :tours
+  map.resources :tours, :has_many => [:shows]
 
   map.resources :song_performances, :member => {:toggle_segue  => :any, :toggle_tag => :any, :update_notes => :any}
 

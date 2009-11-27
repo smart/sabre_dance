@@ -4,7 +4,6 @@ class ShowsController < ApplicationController
   # GET /shows.xml
   def index
     @shows = Show.find(:all, :order => "date desc")
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }
@@ -24,6 +23,8 @@ class ShowsController < ApplicationController
   end
 
 
+
+
   # GET /shows/1
   # GET /shows/1.xml
   def show
@@ -38,6 +39,10 @@ class ShowsController < ApplicationController
         #@right_nav = { :caption => 'Home', :url => "/welcome", :html_options => {} }
       end
     end
+  end
+
+  def parent_names
+    ["tour"]
   end
 
   # GET /shows/new

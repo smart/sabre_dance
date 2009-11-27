@@ -4,14 +4,14 @@
 = sexy_button_to 'Back', tours_path
 
 %br
-%br 
+%br
 
 %h2 Upcoming Shows
 %ul
   - @upcoming_shows.each do |show|
-    %li= link_to"#{show.date}" + (show.venue ? " #{show.venue.name}, #{show.venue.city} #{show.venue.state}" : ""), show_url(show)
+    %li= link_to"#{show.date}" + (show.venue ? " #{show.venue.name}, #{show.venue.city} #{show.venue.state}" : ""), tour_show_url(@tour, show)
 
 %h2 Past Shows
 %ul
   - @past_shows.each do |show|
-    %li= link_to"#{show.date}" + (show.venue ? " #{show.venue.name}, #{show.venue.city} #{show.venue.state}" : ""), show_url(show)
+    %li= link_to"#{show.date}" + (show.venue ? " #{show.venue.name}, #{show.venue.city} #{show.venue.state}" : ""), tour_show_url(@tour, show)
