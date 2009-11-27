@@ -49,7 +49,7 @@ class FanRequestsController < ApplicationController
         flash[:notice] = 'FanRequest was successfully created.'
         format.html { redirect_to(@fan_request) }
         format.xml  { render :xml => @fan_request, :status => :created, :location => @fan_request }
-        format.html { redirect_to(fan_requests_url) }
+        format.iphone { redirect_to(fan_requests_url) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @fan_request.errors, :status => :unprocessable_entity }

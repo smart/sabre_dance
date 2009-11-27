@@ -1,5 +1,7 @@
-%h1 New Request
-.panel
+-   @title     = "New Request"
+-    @left_nav  = { :back => true, :url => :back, :caption => 'Back', :html_options => {} }
+= te_navigation_bar @left_nav, @title
+.panel{:selected => true}
   - form_for @fan_request do |f|
     %h2 Show
     %fieldset
@@ -9,8 +11,8 @@
     %fieldset
       .row
         = f.select :song_id, Song.all.collect{|sg| [sg.name, sg.id]}
-    %h2 Details    
-    %fieldset    
+    %h2 Details
+    %fieldset
       .row
         = f.label :requested_by, "Requested By:"
         = f.text_field :requested_by
