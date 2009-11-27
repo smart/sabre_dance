@@ -1,16 +1,16 @@
 -   @title     = "New Request"
--    @left_nav  = { :back => true, :url => :back, :caption => 'Back', :html_options => {} }
+-    @left_nav  = { :back => true, :url => requests_url, :caption => 'Back', :html_options => {} }
 = te_navigation_bar @left_nav, @title
 .panel{:selected => true}
   - form_for @fan_request do |f|
     %h2 Show
     %fieldset
       .row
-        = f.select :show_id, Show.upcoming.collect{|sg| ["#{sg.date} #{sg.venue.name}", sg.id]}
+        = f.select :show_id, Show.upcoming.find(:all, :order => "date asc").collect{|sg| ["#{sg.date} #{sg.venue.name}", sg.id]}
     %h2 Song
     %fieldset
       .row
-        = f.select :song_id, Song.all.collect{|sg| [sg.name, sg.id]}
+        = f.select :song_id, Song.find(:all, :order => "name asc").collect{|sg| [sg.name, sg.id]}
     %h2 Details
     %fieldset
       .row
