@@ -1,5 +1,5 @@
 -   @title     = "Show"
--    @left_nav  = { :back => true, :caption => 'Back', :url => "/", :html_options => {} }
+-    @left_nav  = { :back => true, :caption => 'Back', :html_options => {} }
 -    @right_nav = { :caption => 'Home', :url => "/welcome", :html_options => {} }
 = te_navigation_bar @left_nav, @title
 %h1=# "#{@show.date}" + (@show.venue ? " #{@show.venue.name}, #{@show.venue.city} #{@show.venue.state}" : "")
