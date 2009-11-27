@@ -1,3 +1,3 @@
 require 'resourceful/maker'
 
-ActionController::Base.extend  Resourceful::Maker::ClassMethods
+ActionController::Base.extend  Resourceful::Maker
