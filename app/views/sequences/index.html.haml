@@ -1,0 +1,10 @@
+%table
+  %thead
+    %tr
+  %tbody
+    - @sequences.each do |sequence|
+      %tr
+        %td
+          = link_to"#{sequence.show.date}", show_url(sequence.show)
+          - sequence.song_performances.each do |sp|
+            = song_performance_for_set_list(sp)

@@ -1,6 +1,7 @@
 class SongPerformance < ActiveRecord::Base
   belongs_to :set_list
   belongs_to :song
+  belongs_to :sequence
   acts_as_list :scope => :set_list
   acts_as_taggable_on :tags
 
@@ -21,4 +22,5 @@ class SongPerformance < ActiveRecord::Base
   def inverted?
     tag_list.any?{|tg| tg.downcase.include?("inverted") }
   end
+
 end

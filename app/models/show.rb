@@ -27,6 +27,12 @@ class Show < ActiveRecord::Base
     show
   end
 
+  def scan_for_sequences(force = false)
+    return true if (!force && scanned_for_sequences?)
+    set_lists.each(&:scan_for_sequences)
+    update_attribute(:scanned_for_sequences, true)
+  end
+
   def update_pt_show_info
     set_pt_show_info
     save
