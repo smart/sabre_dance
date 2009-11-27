@@ -2,7 +2,9 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  include Resourceful::Maker
+  write_inheritable_attribute :parents, []
+  include Resourceful::Default::Accessors
+  include Resourceful::Default::URLs
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   acts_as_iphone_controller
@@ -13,6 +15,10 @@ class ApplicationController < ActionController::Base
     @band_tags ||= ["inverted", "unfinished", "beginning only", "ending only", "middle only", "perfume", "tractor-beam", "techno", "dub", "drum & bass"].collect{|de| Tag.find_or_create_by_name(de)}
   end
   helper_method :band_tags
+
+  def self.belongs_to(*parents)
+    @parents = parents.map(&:to_s)
+  end
 
   helper_method(:object_path, :objects_path, :new_object_path, :edit_object_path,
                 :object_url, :objects_url, :new_object_url, :edit_object_url,
