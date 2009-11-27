@@ -1,6 +1,6 @@
 -   @title     = "Fan Requests"
 -    @left_nav  = { :back => true, :url => :back, :caption => 'Back', :html_options => {} }
--    @right_nav = { :caption => 'New', :url => new_fan_request_path, :html_options => {} }
+-    @right_nav = { :caption => 'New', :url => new_fan_request_path, :html_options => {:class => "te_slide_left"} }
 = te_navigation_bar @left_nav, @title, @right_nav
 %h1=# "#{@show.date}" + (@show.venue ? " #{@show.venue.name}, #{@show.venue.city} #{@show.venue.state}" : "")
 
