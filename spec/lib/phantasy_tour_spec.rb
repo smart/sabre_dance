@@ -11,7 +11,7 @@ describe PhantasyTour do
 
   describe "#song_info_from_id" do
     file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "song_37.html")).to_s
-    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/songs.cgi?songID=37", :content_type => "text/html", :code => 200, :body => file_body)
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/songs.cgi?songID=37", :content_type => "text/html", :code => 200, :body => file_body)
 
     it "should return a hash of song info if valid id" do
       valid_id = 37
@@ -32,7 +32,7 @@ describe PhantasyTour do
 
   describe "#show_info_from_id" do
     file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "show_1167.html")).to_s
-    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/shows.cgi?showID=1167", :content_type => "text/html", :code => 200, :body => file_body)
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/shows.cgi?showID=1167", :content_type => "text/html", :code => 200, :body => file_body)
 
     it "should return a hash of show info if valid id" do
       valid_id = 1167
@@ -65,7 +65,7 @@ describe PhantasyTour do
 
   describe "#venue_info_from_id" do
     file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "venue_1356.html")).to_s
-    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/venues.cgi?venueID=1356", :content_type => "text/html", :code => 200, :body => file_body)
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/venues.cgi?venueID=1356", :content_type => "text/html", :code => 200, :body => file_body)
 
     it "should return a hash of venue info from a valid id" do
       valid_id = 1356
@@ -76,7 +76,7 @@ describe PhantasyTour do
 
   describe "#tour_info_from_id" do
     file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "tour_39.html")).to_s
-    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/tours.cgi?tourID=39", :content_type => "text/html", :code => 200, :body => file_body)
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/tours.cgi?tourID=39", :content_type => "text/html", :code => 200, :body => file_body)
 
     it "should return a hash of tour info from a tour id" do
       valid_id = 39

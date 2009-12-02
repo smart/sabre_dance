@@ -12,13 +12,13 @@ require 'fakeweb'
 
 #CONNECTIONS
 file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "tour_39.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/tours.cgi?tourID=39", :content_type => "text/html", :code => 200, :body => file_body)
+FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/tours.cgi?tourID=39", :content_type => "text/html", :code => 200, :body => file_body)
 file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "show_1167.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/shows.cgi?showID=1167", :content_type => "text/html", :code => 200, :body => file_body)
+FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/shows.cgi?showID=1167", :content_type => "text/html", :code => 200, :body => file_body)
 file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "venue_1356.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/venues.cgi?venueID=1356", :content_type => "text/html", :code => 200, :body => file_body)
+FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/venues.cgi?venueID=1356", :content_type => "text/html", :code => 200, :body => file_body)
 file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "song_37.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/songs.cgi?songID=37", :content_type => "text/html", :code => 200, :body => file_body)
+FakeWeb.register_uri(:get, "http://www.phantasytour.com/phish/songs.cgi?songID=37", :content_type => "text/html", :code => 200, :body => file_body)
 
 
 Spec::Runner.configure do |config|

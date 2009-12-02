@@ -132,7 +132,7 @@ class PhantasyTour
   private
 
   def base_url
-    "http://www.phantasytour.com/bisco"
+    "http://www.phantasytour.com/phish"
   end
 
   def agent
