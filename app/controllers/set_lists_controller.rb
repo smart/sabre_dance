@@ -7,6 +7,7 @@ class SetListsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @set_lists }
+      format.json  { render :json => @set_lists }
     end
   end
 

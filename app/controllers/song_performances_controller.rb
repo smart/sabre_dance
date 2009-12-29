@@ -2,11 +2,16 @@ class SongPerformancesController < ApplicationController
   # GET /song_performances
   # GET /song_performances.xml
   def index
-    @song_performances = set_list.song_performances
+    if set_list
+      @song_performances = set_list.song_performances
+    else
+      @song_performances = SongPerformance.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @song_performances }
+      format.json {  render :json => @song_performances.to_json(:methods => [:inverted?, :tag_list_string]) }
     end
   end
 
@@ -108,6 +113,6 @@ class SongPerformancesController < ApplicationController
   private
 
    def set_list
-     @set_list ||= SetList.find(params[:set_list_id])
+     @set_list ||= SetList.find_by_id(params[:set_list_id])
    end
 end

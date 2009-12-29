@@ -23,4 +23,8 @@ class SongPerformance < ActiveRecord::Base
     tag_list.any?{|tg| tg.downcase.include?("inverted") }
   end
 
+  def tag_list_string
+    tag_list.reject{|tag| tag =~ /nvert/}.join("#;")
+  end
+
 end

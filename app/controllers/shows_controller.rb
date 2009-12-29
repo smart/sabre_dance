@@ -3,10 +3,11 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.xml
   def index
-    @shows = Show.find(:all, :order => "date desc")
+    @shows = Show.find(:all, :order => "date desc", :include => :venue)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }
+      format.json  { render :json => @shows.to_json(:include => :venue) }
       format.iphone do
          @title     = "Shows"
           @left_nav  = { :back => true, :caption => 'Back', :url => :back, :html_options => {} }
@@ -29,10 +30,11 @@ class ShowsController < ApplicationController
   # GET /shows/1.xml
   def show
     @show = Show.find(params[:id])
-
+    @show.show_set_lists
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @show }
+      format.json  { render :json => @show.to_json(:include => :venue) }
       format.iphone do
         @title     = "Shows"
         @left_nav  = { :back => true, :caption => 'Back', :url => :back, :html_options => {} }

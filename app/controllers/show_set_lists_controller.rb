@@ -2,13 +2,18 @@ class ShowSetListsController < ApplicationController
   # GET /show_set_lists
   # GET /show_set_lists.xml
   def index
-    show.default_set_lists
-    @show_set_lists = show.show_set_lists.all
-    @tour = show.tour
+    if show
+      show.default_set_lists
+      @show_set_lists = show.show_set_lists.all
+      @tour = show.tour
+    else
+      @show_set_lists = ShowSetList.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @show_set_lists }
+      format.json  { render :json => @show_set_lists }
     end
   end
 
@@ -73,6 +78,6 @@ class ShowSetListsController < ApplicationController
   private
 
   def show
-    @show ||= Show.find(params[:show_id])
+    @show ||= Show.find_by_id(params[:show_id])
   end
 end
