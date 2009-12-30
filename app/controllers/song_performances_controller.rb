@@ -5,7 +5,8 @@ class SongPerformancesController < ApplicationController
     if set_list
       @song_performances = set_list.song_performances
     else
-      @song_performances = SongPerformance.all
+      @song_performances = SongPerformance.paginate :page => params[:page], :per_page => 50
+
     end
 
     respond_to do |format|
