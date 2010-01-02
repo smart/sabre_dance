@@ -27,4 +27,16 @@ class SongPerformance < ActiveRecord::Base
     tag_list.reject{|tag| tag =~ /nvert/}.join("#;")
   end
 
+  def to_set_list_hash
+    hashr = {}
+    hashr[:song_id] = song_id
+    hashr[:song_name] = song.name
+    hashr[:segue] = segue?
+    hashr[:inverted] = tag_list.any?{|tag| tag =~ /nvert/}
+    hashr[:tag_list_string] = tag_list_string
+    hashr[:notes] = notes
+    hashr[:display_str] = (tag_list.any?{|tag| tag =~ /nvert/} ? "<b>[X] </b>" : "") + "#{song.name}#{segue? ? " >" : ","}" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-size: 75%;\">" + (tag_list.reject{|de| de =~ /nvert/} + [notes]).compact.join(", &nbsp;") +  "</span>"
+    hashr
+  end
+
 end

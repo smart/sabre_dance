@@ -7,7 +7,7 @@ class ShowsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }
-      format.json  { render :json => @shows.to_json(:include => :venue) }
+      format.json  { render :json => @shows.to_json(:methods => :set_list_json) }
       format.iphone do
          @title     = "Shows"
           @left_nav  = { :back => true, :caption => 'Back', :url => :back, :html_options => {} }
@@ -34,7 +34,7 @@ class ShowsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @show }
-      format.json  { render :json => @show.to_json(:include => :venue) }
+      format.json  { render :json => @show.to_json(:methods => :set_list_json) }
       format.iphone do
         @title     = "Shows"
         @left_nav  = { :back => true, :caption => 'Back', :url => :back, :html_options => {} }

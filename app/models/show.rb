@@ -83,21 +83,18 @@ class Show < ActiveRecord::Base
     self.tour ||= Tour.find_or_create_by_pt_id(pt_info[:pt_tour_id]) if pt_info[:pt_tour_id].to_i > 0
   end
 
+  def set_list_json
+    set_list_hash.to_json
+  end
+
   def set_list_hash
     i = 0
     show_set_lists.collect do |show_set_list|
       set = {}
       set[:name] = show_set_list.name || ( (show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:")
       set[:position] = i
-      set[:data] = (show_set_list && show_set_list.set_list) && show_set_list.try(:set_list).song_performances.collect do |sp|
-        hashr = {}
-        hashr[:song_id] = sp.song_id
-        hashr[:song_name] = sp.song.name
-        hashr[:segue] = sp.segue?
-        hashr[:inverted] = sp.tag_list.any?{|tag| tag =~ /nvert/}
-        #hashr[:notes] = sp.tag_list.reject{|de| de =~ /nvert/} + [sp.notes]
-        hashr[:display_str] = (sp.tag_list.any?{|tag| tag =~ /nvert/} ? "<b>[X] </b>" : "") + "#{sp.song.name}#{sp.segue? ? " >" : ","}" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-size: 75%;\">" + (sp.tag_list.reject{|de| de =~ /nvert/} + [sp.notes]).compact.join(", &nbsp;") +  "</span>"
-        hashr
+      set[:song_performances] = (show_set_list && show_set_list.set_list) && show_set_list.try(:set_list).song_performances.collect do |sp|
+        sp.to_set_list_hash
       end
       i += 1
       set
