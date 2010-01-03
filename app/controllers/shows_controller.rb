@@ -11,7 +11,7 @@ class ShowsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }
-      format.json  { render :json => @shows.to_json(:methods => :set_list_json) }
+      format.json  { render :json => @shows.to_json }
       format.iphone do
          @title     = "Shows"
           @left_nav  = { :back => true, :caption => 'Back', :url => :back, :html_options => {} }
