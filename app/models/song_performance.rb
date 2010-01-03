@@ -40,7 +40,7 @@ class SongPerformance < ActiveRecord::Base
   end
 
   def to_json(opts)
-    opts.merge!(:only => [:song_id], :methods =>[ :show_id, :info])
+    opts.merge!(:only => [:id, :song_id], :methods =>[ :show_id, :info])
     super(opts)
   end
 
