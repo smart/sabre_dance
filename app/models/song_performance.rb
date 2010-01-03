@@ -35,7 +35,7 @@ class SongPerformance < ActiveRecord::Base
     hashr[:inverted] = tag_list.any?{|tag| tag =~ /nvert/}
     hashr[:tag_list_string] = tag_list_string
     hashr[:notes] = notes
-    hashr[:display_str] = (tag_list.any?{|tag| tag =~ /nvert/} ? "<b>[X] </b>" : "") + "#{song.name}#{segue? ? " >" : ","}" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-size: 75%;\">" + (tag_list.reject{|de| de =~ /nvert/} + [notes]).compact.join(", &nbsp;") +  "</span>"
+    hashr[:position] = position
     hashr
   end
 

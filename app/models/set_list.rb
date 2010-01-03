@@ -1,5 +1,5 @@
 class SetList < ActiveRecord::Base
-  has_many :song_performances
+  has_many :song_performances , :order => :position
   has_many :songs, :through => :song_performances
   has_one :show_set_list
   has_many :shows, :through => :show_set_lists
