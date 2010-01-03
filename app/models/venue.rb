@@ -25,6 +25,11 @@ class Venue < ActiveRecord::Base
     venue
   end
 
+  def to_json(opts = {})
+    opts.merge!(:except =>[:created_at, :updated_at, :pt_id])
+    super(opts)
+  end
+
   private
   def geocode_address
       geo=Geokit::Geocoders::MultiGeocoder.geocode(address)

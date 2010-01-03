@@ -83,6 +83,12 @@ class Show < ActiveRecord::Base
     self.tour ||= Tour.find_or_create_by_pt_id(pt_info[:pt_tour_id]) if pt_info[:pt_tour_id].to_i > 0
   end
 
+  def to_json(opts = {})
+    opts.merge!(:methods => :set_list_json, :except =>[:notes, :scanned_for_sequences, :created_at, :updated_at, :pt_id])
+    super(opts)
+  end
+
+
   def set_list_json
     set_list_hash.to_json
   end

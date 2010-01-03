@@ -7,7 +7,7 @@ class VenuesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @venues }
-      format.json  { render :json => @venues }
+      format.json  { render :json => @venues}
     end
   end
 

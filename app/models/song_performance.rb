@@ -27,6 +27,23 @@ class SongPerformance < ActiveRecord::Base
     tag_list.reject{|tag| tag =~ /nvert/}.join("#;")
   end
 
+  def info
+    "#{set}%^#{position}%^#{segue? ? 1 : 0}%^#{inverted? ? 1 : 0}%^#{notes}%^#{tag_list_string}"
+  end
+
+  def set
+    set_list.show_set_list.try(:position)
+  end
+
+  def show_id
+    set_list.show_set_list.try(:show_id)
+  end
+
+  def to_json(opts)
+    opts.merge!(:only => [:song_id], :methods =>[ :show_id, :info])
+    super(opts)
+  end
+
   def to_set_list_hash
     hashr = {}
     hashr[:song_id] = song_id

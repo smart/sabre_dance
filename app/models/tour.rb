@@ -22,6 +22,11 @@ class Tour < ActiveRecord::Base
     tour
   end
 
+  def to_json(opts = {})
+    opts.merge!(:except =>[:created_at, :updated_at, :pt_id])
+    super(opts)
+  end
+
   def song_stats
     Song.find(:all, :select => "songs.name as name, songs.id as id, COUNT(song_performances.song_id) as plays", :order => "plays desc", :joins => [{:song_performances => {:set_list => {:show_set_list => :show}}}], :conditions => ["tour_id = ?", id], :group => "songs.id, songs.name")
     #SongPerformance.find(:all, :select => "songs.name as name, songs.id as id, COUNT(song_performances.song_id) as plays", :order => "plays desc", :joins => [{:set_list => {:show_set_list => :show}}, :song], :conditions => ["tour_id = ?", id], :group => "song_performances.song_id")

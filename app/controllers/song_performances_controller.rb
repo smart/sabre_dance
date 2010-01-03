@@ -5,14 +5,14 @@ class SongPerformancesController < ApplicationController
     if set_list
       @song_performances = set_list.song_performances
     else
-      @song_performances = SongPerformance.paginate :page => params[:page], :per_page => 50
+      @song_performances = SongPerformance.find(:all, :include => {:set_list => :show_set_list}).paginate :page => params[:page], :per_page => 1000
 
     end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @song_performances }
-      format.json {  render :json => @song_performances.to_json(:methods => [:inverted?, :tag_list_string]) }
+      format.json {  render :json => @song_performances }
     end
   end
 
