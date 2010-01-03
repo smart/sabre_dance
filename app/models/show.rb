@@ -84,7 +84,7 @@ class Show < ActiveRecord::Base
   end
 
   def to_json(opts = {})
-    opts.merge!(:methods => :set_list_json, :except =>[:notes, :scanned_for_sequences, :created_at, :updated_at, :pt_id])
+    opts.merge!(:except =>[:notes, :scanned_for_sequences, :created_at, :updated_at, :pt_id])
     super(opts)
   end
 
