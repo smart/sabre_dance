@@ -32,11 +32,11 @@ class SongPerformance < ActiveRecord::Base
   end
 
   def set
-    set_list.show_set_list.try(:position)
+    set_list.try(:show_set_list).try(:position)
   end
 
   def show_id
-    set_list.show_set_list.try(:show_id)
+    set_list.try(:show_set_list).try(:show_id)
   end
 
   def to_json(opts)
