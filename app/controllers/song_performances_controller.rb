@@ -5,7 +5,7 @@ class SongPerformancesController < ApplicationController
     if set_list
       @song_performances = set_list.song_performances
     else
-      @song_performances = SongPerformance.find(:all, :include => {:set_list => :show_set_list}).paginate :page => params[:page], :per_page => 1000
+      @song_performances = SongPerformance.find(:all, :include => {:set_list => :show_set_list}, :order => "song_performances.id asc").paginate :page => params[:page], :per_page => 1000
 
     end
 

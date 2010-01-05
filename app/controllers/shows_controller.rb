@@ -3,11 +3,12 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.xml
   def index
-    @shows = Show.find(:all, :order => "date desc", :include => [:venue,
-                                                                 {:show_set_lists => {
-                                                                                     :set_list => {:song_performances => :song }
-                                                                                     }}
-                                                                ]).paginate(:page => params[:page], :per_page => 100)
+    if params[:page]
+      @shows = Show.full_info.find(:all, :order => "date desc").paginate(:page => params[:page], :per_page => 100)
+    else
+      @shows = Show.full_info.find(:all, :order => 'date desc')
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }

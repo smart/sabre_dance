@@ -1,3 +1,4 @@
+require 'base64'
 class Show < ActiveRecord::Base
   has_many :show_set_lists, :order => :position
   has_many :set_lists, :through => :show_set_lists
@@ -14,6 +15,10 @@ class Show < ActiveRecord::Base
 
   named_scope :upcoming, :conditions => ["shows.date >= ?", Date.today]
   named_scope :played, :conditions => ["shows.date < ?", Date.today]
+  named_scope :full_info, :include => [:venue,
+                                       {:show_set_lists => {
+                                                            :set_list => {:song_performances => :song }
+                                                           }}]
 
   def self.find_or_create_by_pt_id(id)
     find_by_pt_id(id) || create_by_pt_id(id)
@@ -84,13 +89,13 @@ class Show < ActiveRecord::Base
   end
 
   def to_json(opts = {})
-    opts.merge!(:except =>[:notes, :scanned_for_sequences, :created_at, :updated_at, :pt_id])
+    opts.merge!(:methods =>[:set_list_json], :except =>[:notes, :scanned_for_sequences, :created_at, :updated_at, :pt_id])
     super(opts)
   end
 
 
   def set_list_json
-    set_list_hash.to_json
+   set_list_hash.to_json.to_a.pack("m")
   end
 
   def set_list_hash
