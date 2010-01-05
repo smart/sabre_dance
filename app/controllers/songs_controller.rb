@@ -2,7 +2,12 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.xml
   def index
-    @songs = Song.find(:all, :order => "name asc")
+
+    if params[:page]
+      @songs = Song.find(:all, :order => "name asc").paginate(:page => params[:page], :per_page => 100)
+    else
+      @songs = Song.find(:all, :order => "name asc")
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +22,7 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # song.html.erb
       format.xml  { render :xml => @song }
       format.json { render :json  => @song }
     end

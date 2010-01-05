@@ -2,7 +2,11 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.xml
   def index
-    @venues = Venue.all
+    if params[:page]
+      @venues = Venue.find(:all, :order => "venues.id desc").paginate(:page => params[:page], :per_page => 100)
+    else
+      @venues = Venue.find(:all, :order => 'venues.id desc')
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +21,7 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # venue.html.erb
       format.xml  { render :xml => @venue }
     end
   end
