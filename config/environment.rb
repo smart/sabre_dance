@@ -39,6 +39,8 @@ Rails::Initializer.run do |config|
   config.gem 'mechanize'
   config.gem 'mislav-will_paginate', :lib => 'will_paginate', :version => '~> 2.3.0'
   config.gem 'geokit'
+  config.gem 'nokogiri'
+  config.gem "feedzirra"
   #config.gem "icalendar"
   #config.gem "chriseppstein-compass", :lib => "compass"
   #config.gem 'pauldix-feedzirra', :lib => "feedzirra"
