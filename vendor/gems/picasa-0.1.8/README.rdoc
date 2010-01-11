@@ -1,0 +1,35 @@
+= Picasa
+
+Simple google picasa managment.
+Only for public albums so far.
+
+= Installation
+
+  sudo gem install picasa --source http://gemcutter.org
+
+In RAILS_ROOT/config/environment.rb
+
+  config.gem "picasa"
+
+== Usage
+
+  Picasa.albums(:google_user => 'google_username')
+  #=> [ {:id => "666", :title => "satan-album", :photos_count => 6, :photo => "url", :thumbnail => "url"},
+  #     {another one} ]
+
+  Picasa.photos(:google_user => 'google_username', :album_id => 'album_id')
+  #=> {:photos => [{ :title, :thumbnail_1, :thumbnail_2, :thumbnail_3, :photo },{}],
+  #    :slideshow => "link to picasa slideshow"}
+
+or you can set google user in initializer like this:
+
+  Picasa::WebAlbums.google_user = "google_username"
+
+and use it:
+
+  Picasa.albums
+  Picasa.photos(:album_id => 'album_id')
+
+= Copyright
+
+Copyright (c) 2009 Wojciech Wnętrzak, released under the MIT license.
