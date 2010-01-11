@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :photos
+
+  map.resources :photo_albums
+
   map.resources :posts
 
   map.resources :fan_requests

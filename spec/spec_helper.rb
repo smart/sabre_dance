@@ -7,19 +7,9 @@ require 'spec/rails'
 require 'factory_girl'
 require 'factories'
 require 'fakeweb'
+require 'support/fixture_helper'
 
 #FakeWeb.allow_net_connect = false
-
-#CONNECTIONS
-file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "tour_39.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/tours.cgi?tourID=39", :content_type => "text/html", :code => 200, :body => file_body)
-file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "show_1167.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/shows.cgi?showID=1167", :content_type => "text/html", :code => 200, :body => file_body)
-file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "venue_1356.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/venues.cgi?venueID=1356", :content_type => "text/html", :code => 200, :body => file_body)
-file_body = File.read(File.join(RAILS_ROOT, "spec", "responses", "song_37.html")).to_s
-FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/songs.cgi?songID=37", :content_type => "text/html", :code => 200, :body => file_body)
-
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
@@ -28,7 +18,7 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-
+  config.include FixtureHelper
   # == Fixtures
   #
   # You can declare fixtures for each example_group like this:
@@ -60,4 +50,16 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+  config.before(:all) do
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/tours.cgi?tourID=39", :content_type => "text/html", :code => 200, :body => response_fixture("tour_39.html"))
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/shows.cgi?showID=1167", :content_type => "text/html", :code => 200, :body => response_fixture("show_1167.html"))
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/venues.cgi?venueID=1356", :content_type => "text/html", :code => 200, :body => response_fixture("venue_1356.html"))
+    FakeWeb.register_uri(:get, "http://www.phantasytour.com/bisco/songs.cgi?songID=37", :content_type => "text/html", :code => 200, :body => response_fixture("song_37.html"))
+    FakeWeb.register_uri(:get, "picasaweb.google.com/data/feed/api/user/tdbpress", :content_type => "text/html", :code => 200, :body => response_fixture("photo_albums.html"))
+    #FakeWeb.register_uri(:get, "picasaweb.google.com/data/feed/api/user/tdbpress/albumid/5421481282645844849", :response => response_fixture("photos.xml"))
+  end
 end
+
+#CONNECTIONS
+
+

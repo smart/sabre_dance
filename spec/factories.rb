@@ -33,3 +33,21 @@ Factory.define(:tour) do |t|
   t.name "Fall Tour 2009"
   t.sequence(:pt_id){|de| de }
 end
+
+Factory.define(:photo_album) do |t|
+end
+
+Factory.define(:photo) do |t|
+  t.association :photo_album
+  t.sequence(:picasa_id){|de| de }
+  t.photo "http://lh3.ggpht.com/_D2jwmE6y1Mc/S0PYFBwzhwI/AAAAAAAACbc/Y1TI5CvlFos/12.31.jpg"
+end
+
+Factory.define(:post) do |t|
+  t.post_type  "Official News"
+end
+
+Factory.define(:fan_request) do |t|
+  t.association :show
+  t.association :song
+end
