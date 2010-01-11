@@ -41,6 +41,7 @@ Rails::Initializer.run do |config|
   config.gem 'geokit'
   config.gem 'nokogiri'
   config.gem "feedzirra"
+  config.gem 'picasa'
   #config.gem "icalendar"
   #config.gem "chriseppstein-compass", :lib => "compass"
   #config.gem 'pauldix-feedzirra', :lib => "feedzirra"
