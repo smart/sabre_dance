@@ -10,19 +10,32 @@ class Venue < ActiveRecord::Base
   end
 
   def address
-    "#{city}, #{state}"
+    full_address || "#{city}, #{state}"
+  end
+
+  def set_pt_info
+    self.name = pt_info[:name]
+    self.pt_id = pt_info[:pt_id]
+    self.city = pt_info[:city]
+    self.state = pt_info[:state]
+    self.full_address = pt_info[:full_address]
   end
 
   def self.create_by_pt_id(id)
-    pt_data = PhantasyTour.new.venue_info_from_id(id)
-
-    venue = new
-    venue.name = pt_data[:name]
-    venue.pt_id = pt_data[:pt_id]
-    venue.city = pt_data[:city]
-    venue.state = pt_data[:state]
+    venue = new(:pt_id => id)
+    venue.set_pt_info
     venue.save!
     venue
+  end
+
+  def update_pt_info
+    self.set_pt_info
+    geocode_address
+    self.save
+  end
+
+  def pt_info
+   @pt_info ||= PhantasyTour.new.venue_info_from_id(pt_id)
   end
 
   def to_json(opts = {})
