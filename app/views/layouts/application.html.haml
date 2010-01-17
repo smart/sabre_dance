@@ -11,4 +11,5 @@
     .container
       .flash
         %p{:style => "color: green"}= flash[:notice]
+        %p{:style => "color: red"}= flash[:error]
       .content#content= yield
