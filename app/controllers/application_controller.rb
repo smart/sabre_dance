@@ -27,4 +27,68 @@ class ApplicationController < ActionController::Base
                 :current_objects, :current_object, :current_model, :current_model_name,
                 :namespaces, :instance_variable_name, :parent_names, :parent_name,
                 :parent?, :parent_model, :parent_object, :save_succeeded?)
+
+
+
+  #LOGIN
+  def login_required
+    logged_in? || access_denied
+  end
+
+  def access_denied
+    respond_to do |format|
+      format.html do
+        flash[:error] = "You must be authenticated to perform this action"
+        store_location
+        redirect_to login_url
+      end
+      format.any do
+        request_http_basic_authentication 'Web Password'
+      end
+    end
+  end
+
+  def store_location
+    session[:return_to] = request.request_uri
+  end
+
+  def redirect_back_or_default(default)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
+  end
+
+  def authenticate
+    if Digest::SHA1.hexdigest(params[:session][:password] || "") == ADMIN_PASSWORD_HASH
+      self.logged_in = true
+    else
+      self.logged_in = false
+    end
+  end
+
+  def logged_in
+    @logged_in ||= login_from_session
+  end
+
+  def login_from_session
+    session[:logged_in]
+  end
+
+  def logged_in=(value)
+    session[:logged_in] = value || false
+    @logged_in = value || false
+  end
+
+  def logout
+    session[:logged_in] = false
+    @logged_in = false
+  end
+
+
+  def logged_in?
+    logged_in ? true : false
+  end
+
+  def subdomain_nested?
+    false
+  end
 end

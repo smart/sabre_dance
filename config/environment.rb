@@ -50,3 +50,5 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+ADMIN_PASSWORD_HASH = "c02409eba023ad1ed0f49ae8454c8b87d5c6d56b"
