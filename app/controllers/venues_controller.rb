@@ -1,4 +1,6 @@
 class VenuesController < ApplicationController
+  before_filter :login_required
+
   # GET /venues
   # GET /venues.xml
   def index

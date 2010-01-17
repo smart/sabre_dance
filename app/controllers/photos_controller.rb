@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+  before_filter :login_required
   # GET /photos
   # GET /photos.xml
   def index

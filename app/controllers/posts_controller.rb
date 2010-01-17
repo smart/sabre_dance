@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_filter :login_required
   # GET /posts
   # GET /posts.xml
   def index

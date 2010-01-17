@@ -1,4 +1,5 @@
 class PhotoAlbumsController < ApplicationController
+  before_filter :login_required
   # GET /photo_albums
   # GET /photo_albums.xml
   def index
@@ -14,6 +15,12 @@ class PhotoAlbumsController < ApplicationController
        format.json  { render :json => @photo_albums}
      end
    end
+
+
+   def sync
+     PhotoAlbum.sync_from_picasa
+   end
+
 
   # GET /photo_albums/1
   # GET /photo_albums/1.xml

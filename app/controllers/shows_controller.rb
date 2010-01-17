@@ -1,5 +1,7 @@
 class ShowsController < ApplicationController
   include ShowsHelper
+  before_filter :login_required
+
   # GET /shows
   # GET /shows.xml
   def index

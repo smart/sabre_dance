@@ -1,4 +1,5 @@
 class SetListsController < ApplicationController
+  before_filter :login_required
   # GET /set_lists
   # GET /set_lists.xml
   def index

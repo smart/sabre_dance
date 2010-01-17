@@ -1,4 +1,5 @@
 class SongPerformancesController < ApplicationController
+  before_filter :login_required
   # GET /song_performances
   # GET /song_performances.xml
   def index

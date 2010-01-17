@@ -1,4 +1,5 @@
 class ShowSetListsController < ApplicationController
+  before_filter :login_required
   # GET /show_set_lists
   # GET /show_set_lists.xml
   def index
