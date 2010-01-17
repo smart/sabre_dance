@@ -43,6 +43,7 @@ describe PhantasyTour do
                           :pt_venue_id => 1356,
                           :venue_name => "Calvin Theatre",
                           :tour_name => "Fall Tour 2009",
+                          :show_name => nil,
                           :show_setlist=>[
                                           {:name=>"Set I:", :songs=>[{:segue=>true, :pt_song_id=>304, :notes=>[], :note_numbers=>[], :name=>"Papercut"},
                                                                      {:segue=>false, :pt_song_id=>56, :notes=>[], :note_numbers=>[], :name=>"Mr. Don"},
@@ -70,7 +71,7 @@ describe PhantasyTour do
     it "should return a hash of venue info from a valid id" do
       valid_id = 1356
       ret_hash = @pt.venue_info_from_id(valid_id)
-      ret_hash.should == {:pt_id=>1356, :website=>"www.calvintheater.com/", :map=>"http://maps.yahoo.com/py/maps.py?addr=19 King Street&\n      csz=Northampton+MA&country=", :state=>"MA", :city=>"Northampton", :name=>"Calvin Theatre"}
+      ret_hash.should == {:full_address=>"19 King Street Northampton,  MA 01060 ", :pt_id=>1356, :website=>"www.calvintheater.com/", :map=>"http://maps.yahoo.com/py/maps.py?addr=19 King Street&\n      csz=Northampton+MA&country=", :state=>"MA", :city=>"Northampton", :name=>"Calvin Theatre"}
     end
   end
 

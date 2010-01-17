@@ -1,3 +1,6 @@
+class PhantasyTourItemNotFound < StandardError
+end
+
 class PhantasyTour
 
 
@@ -19,6 +22,7 @@ class PhantasyTour
       info[:pt_nickname] = box.gsub("PT nickname: ", "") if box.include?("PT nickname")
       info[:author] = box.gsub("Written by: ", "") if box.include?("Written by:")
     end
+    raise PhantasyTourItemNotFound if info[:name].blank?
     info
   end
 
@@ -110,6 +114,10 @@ class PhantasyTour
         info[:website] = link.inner_text
       end
     end
+    inner = (item/"td[2]").inner_text
+    full_addr = inner.gsub("MAP", "").gsub(info[:website].to_s, "").gsub(info[:name].to_s, "").gsub(info[:city].to_s, " #{info[:city]}").gsub(info[:state].to_s, " #{info[:state]}").strip.gsub("\n"," ").split("USA")
+    check = full_addr.first.to_s.gsub(info[:city].to_s, "").gsub(info[:state], "").gsub(",", "").strip
+    info[:full_address] = (full_addr.first && !check.blank?) ? full_addr.first : nil
     info
   end
 
