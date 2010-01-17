@@ -57,16 +57,18 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
 
-  def authenticate
-    if Digest::SHA1.hexdigest(params[:session][:password] || "") == ADMIN_PASSWORD_HASH
+  def authenticate(password)
+    if Digest::SHA1.hexdigest(password.to_s) == ADMIN_PASSWORD_HASH
       self.logged_in = true
+      true
     else
       self.logged_in = false
+      false
     end
   end
 
   def logged_in
-    @logged_in ||= login_from_session
+    @logged_in ||= login_from_session || login_from_params
   end
 
   def login_from_session
@@ -91,4 +93,10 @@ class ApplicationController < ActionController::Base
   def subdomain_nested?
     false
   end
+
+  #allows the login from authentication params
+  def login_from_params
+    authenticate(params[:password])
+  end
+
 end

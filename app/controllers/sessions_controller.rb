@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if authenticate && logged_in?
+    if authenticate(params[:session][:password]) && logged_in?
       flash[:notice] = "Login successful!"
       redirect_back_or_default "/"
     else
