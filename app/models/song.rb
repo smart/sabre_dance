@@ -32,8 +32,6 @@ class Song < ActiveRecord::Base
                                       :order => "plays desc",:joins => :fan_requests,
                                       :conditions => ["fan_requests.show_id = ?", show_id], :group => "songs.id, songs.name" }}
 
-
-
   def self.played_in_radius(address, radius = 40)
     venues = Venue.find(:all, :origin => address, :within => radius)
     played_at_venues(venues)
@@ -58,6 +56,10 @@ class Song < ActiveRecord::Base
 
   def phantasy_tour
     @pt ||= PhantasyTour.new
+  end
+
+  def nickname
+    pt_nickname || name
   end
 
 
