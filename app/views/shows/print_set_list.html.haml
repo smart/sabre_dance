@@ -3,7 +3,9 @@
 #left
   - @show.show_set_lists.each_with_index do |show_set_list, i|
     %br
-    %h2= show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:" )
+    %h2
+      = (show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:" )).upcase
+      =" #{show_set_list.notes}"
     - show_set_list.set_list.song_performances.each do |sp|
       %h3= (sp.tag_list.include?("inverted") ? "<b> |X| </b>" : "") +  "#{sp.song.nickname} " + (sp.segue? ? " ->" : "")
       - if tag_list = (sp.tag_list.reject{|de| de == "inverted"} + [sp.notes]).compact.join(", &nbsp;")

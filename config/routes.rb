@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :set_lists, :member => {:sort => :any}, :has_many => [:song_performances]
 
-  map.resources :show_set_lists
+  map.resources :show_set_lists, :member => {:update_notes => :any}
 
   map.resources :tours, :has_many => [:shows]
 

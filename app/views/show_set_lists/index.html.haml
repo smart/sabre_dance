@@ -17,8 +17,14 @@
     .show_set_list{:id => "show_set_list_#{show_set_list.id}"}
       .show_set_list_title.clearfix
         = link_to_function('show/hide', "Element.toggle('set_list_#{show_set_list.set_list.id}')", :class => "set-communications-button right_button")
-        %h2{:style => "float:left;"}=show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:")
-        = link_to "(delete)", show_set_list_url(show_set_list), :method => :delete, :confirm  => "Are you sure you want to delete this set?", :style => "float:left;padding: 10px 0px 0px 10px;"
+        = link_to "(delete)", show_set_list_url(show_set_list), :method => :delete, :confirm  => "Are you sure you want to delete this set?", :class => "set-communications-button right_button", :style => "padding-right:20px;"
+        %h2{:style => "float:left;margin-right:15px;"}=show_set_list.name || ( (@show.show_set_lists.size - 1) == i ? "Encore:" : "Set #{i + 1}:")
+
+        - if show_set_list.notes.blank?
+          = link_to_function('add set list note', "Element.show('set_notes_#{show_set_list.id}');Element.hide('set_notes_#{show_set_list.id}_toggle')", :class => "set-communications-button left_button", :style => "float:left;padding: 10px 0px 0px 10px;", :id => "set_notes_#{show_set_list.id}_toggle")
+        %div{:id => "set_notes_#{show_set_list.id}", :style => "#{show_set_list.notes.blank? ? "display:none;" : ""}"}
+          = text_field_tag "show_set_list_notes_#{show_set_list.id}", show_set_list.notes
+          = observe_field("show_set_list_notes_#{show_set_list.id}" , :frequency => 1, :url => update_notes_show_set_list_url(show_set_list), :with => "notes")
 
       = render :partial => "show_set_lists/set_list", :locals => {:set_list => show_set_list.set_list}
 

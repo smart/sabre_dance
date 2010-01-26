@@ -29,6 +29,12 @@ class ShowSetListsController < ApplicationController
     end
   end
 
+  def update_notes
+    @show_set_list = ShowSetList.find(params[:id])
+    @show_set_list.update_attribute(:notes, params[:notes])
+    render :nothing => true
+  end
+
   # POST /show_set_lists
   # POST /show_set_lists.xml
   def create
