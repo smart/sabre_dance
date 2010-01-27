@@ -3,6 +3,6 @@
   %head
     %link{ :rel => "shortcut icon", :href => "/favicon.ico", :type => "image/x-icon"}/
     %title= "Sabre Dance :: "+ controller.controller_name.capitalize
-    = stylesheet_link_tag 'compiled/print'
+    = stylesheet_link_tag 'compiled/print', :media => "all"
   %body
     = yield
