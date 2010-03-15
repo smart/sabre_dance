@@ -1,4 +1,5 @@
 class FanRequestsController < ApplicationController
+  protect_from_forgery :except => [:create]
   # GET /fan_requests
   # GET /fan_requests.xml
   def index
@@ -42,18 +43,20 @@ class FanRequestsController < ApplicationController
   # POST /fan_requests
   # POST /fan_requests.xml
   def create
-    @fan_request = FanRequest.new(params[:fan_request])
+    @fan_request = FanRequest.new(:song_id => params[:song_id], :show_id => params[:show_id], :requested_by => params[:requested_by], :notes => params[:notes] )
 
     respond_to do |format|
       if @fan_request.save
         flash[:notice] = 'FanRequest was successfully created.'
-        format.html { redirect_to(@fan_request) }
-        format.xml  { render :xml => @fan_request, :status => :created, :location => @fan_request }
-        format.iphone { redirect_to(fan_requests_url) }
+        #format.html { redirect_to(@fan_request) }
+        #format.xml  { render :xml => @fan_request, :status => :created, :location => @fan_request }
+        format.all { render :json => @fan_request}
+        #format.iphone { redirect_to(fan_requests_url) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @fan_request.errors, :status => :unprocessable_entity }
-        format.iphone { render :action => "new" }
+        #format.html { render :action => "new" }
+        #format.xml  { render :xml => @fan_request.errors, :status => :unprocessable_entity }
+        format.all { render :json => @fan_request.errors, :status => :unprocessable_entity}
+        #format.iphone { render :action => "new" }
       end
     end
   end
